@@ -1,0 +1,10 @@
+﻿  FigureModel.cpp
+D:\COURSEWORK\GOSTDiagram\AbstractFigure.h(5,11): warning C4570: AbstractFigure: не был объявлен явно как абстрактный, однако содержит абстрактные функции
+D:\COURSEWORK\GOSTDiagram\AbstractFigure.h(5,11): message : void AbstractFigure::drawFigure(System::Windows::Forms::PaintEventArgs ^,bool): абстрактный
+D:\COURSEWORK\GOSTDiagram\AbstractFigure.h(8): message : см. объявление "AbstractFigure::drawFigure"
+D:\COURSEWORK\GOSTDiagram\RectFunc.h(3,11): warning C4570: RectFunc: не был объявлен явно как абстрактный, однако содержит абстрактные функции
+D:\COURSEWORK\GOSTDiagram\RectFunc.h(3,11): message : void RectFunc::drawFigure(System::Windows::Forms::PaintEventArgs ^,bool): абстрактный
+D:\COURSEWORK\GOSTDiagram\RectFunc.h(12): message : см. объявление "RectFunc::drawFigure"
+D:\COURSEWORK\GOSTDiagram\FigureModel.cpp(118,16): warning C4244: =: преобразование "float" в "int", возможна потеря данных
+  AbstractFigure.obj : обнаружен модуль MSIL; для MSIL последовательная компоновка отключена; выполняется полная компоновка
+  GOSTDiagram.vcxproj -> D:\COURSEWORK\GOSTDiagram\Debug\GOSTDiagram.exe

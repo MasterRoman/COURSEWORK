@@ -1,0 +1,5 @@
+D:\COURSEWORK\GOSTDiagram\Debug\GOSTDiagram.vcxprojAssemblyReference.cache
+D:\COURSEWORK\GOSTDiagram\Debug\GOSTDiagram.Controller.resources
+D:\COURSEWORK\GOSTDiagram\Debug\GOSTDiagram.vcxproj.GenerateResource.cache
+D:\COURSEWORK\GOSTDiagram\Debug\GOSTDiagram.exe
+D:\COURSEWORK\GOSTDiagram\Debug\GOSTDiagram.pdb
