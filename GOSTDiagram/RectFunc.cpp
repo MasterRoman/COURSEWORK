@@ -3,6 +3,7 @@
 
 
 RectFunc::RectFunc() {
+	this->text = nullptr;
 }
 
 RectFunc::~RectFunc() {

@@ -1,6 +1,10 @@
 #pragma once
 
 
+enum WriteType {
+	WRITE,
+	NOT_WRITE
+};
 
 enum FunctionType{
 	POINTER,
@@ -17,8 +21,8 @@ enum TDrawMode
 {
 	DRAW,
 	NOT_DRAW,
-	DRAW_LINE
-
+	DRAW_LINE,
+	WRITE_TEXT
 };
 
 

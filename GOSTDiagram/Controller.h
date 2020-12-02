@@ -13,10 +13,13 @@
 FunctionType curType;
 EditMode curEditMode;
 TDrawMode curDrawMode;
+WriteType curWriteType;
 bool isChanged;
 int curX, curY;
+int startX, startY;
 Rect selectedRect;
 bool saveToBMP;
+bool isMove;
 
 
 
@@ -557,6 +560,7 @@ namespace GOSTDiagram {
 			this->pictureBox->TabIndex = 0;
 			this->pictureBox->TabStop = false;
 			this->pictureBox->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &Controller::pictureBox_Paint);
+			this->pictureBox->DoubleClick += gcnew System::EventHandler(this, &Controller::pictureBox_DoubleClick);
 			this->pictureBox->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &Controller::pictureBox_MouseDown);
 			this->pictureBox->MouseMove += gcnew System::Windows::Forms::MouseEventHandler(this, &Controller::pictureBox_MouseMove);
 			this->pictureBox->MouseUp += gcnew System::Windows::Forms::MouseEventHandler(this, &Controller::pictureBox_MouseUp);
@@ -634,6 +638,7 @@ bool saveNewFile() {
 		if ((path->Length != 0) && (ext!="bmp")){
 
 			curPath = path;
+			saveToFile(head, curPath);
 			return true;
 		}
 		else if (path->Length != 0) {
@@ -674,8 +679,15 @@ void actOpen() {
 	System::String^ str = openNFile();
 	if ((str->Length != 0) && (str->ToString() != "openFileDialog")) {
 		//open file 
+		cleanList(head);
 		curPath = str;
-		isChanged = false;
+		if (readFromFile(head, curPath)) {
+			isChanged = false;
+			
+		}
+		//else
+		//	actNew();
+		
 		pictureBox->Invalidate();
 	} 
 
@@ -689,7 +701,8 @@ void actSave() {
 	int pos = curPath->IndexOf(".");
 	System::String^ ext = curPath->Substring(pos + 1);
 	if ((curPath->Length != 0) && (ext!="bmp")) {
-		//save to spec file
+		saveToFile(head, curPath);
+		
 	}
 	else if (curPath->Length != 0) {
 		//save bmp
@@ -750,6 +763,72 @@ void stopDrawLine() {
 
 }
 
+void changeCursor(EditMode mode) {
+	switch (mode)
+	{
+
+	case NOT_EDIT:
+	{
+		pictureBox->Cursor = System::Windows::Forms::Cursors::Arrow;
+		break;
+	}
+	case MOVE:
+	{
+
+		pictureBox->Cursor = System::Windows::Forms::Cursors::SizeAll;
+		break;
+	}
+
+	case TOP:
+	{
+		pictureBox->Cursor = System::Windows::Forms::Cursors::SizeNS;
+		break;
+	}
+	case BOTTOM:
+	{
+		pictureBox->Cursor = System::Windows::Forms::Cursors::SizeNS;
+		break;
+	}
+	case RIGHT:
+	{
+		pictureBox->Cursor = System::Windows::Forms::Cursors::SizeWE;
+		break;
+	}
+	case LEFT:
+	{
+		pictureBox->Cursor = System::Windows::Forms::Cursors::SizeWE;
+		break;
+	}
+	case LEFT_TOP:
+	{
+		pictureBox->Cursor = System::Windows::Forms::Cursors::SizeNWSE;
+		break;
+	}
+	case RIGHT_TOP:
+	{
+		pictureBox->Cursor = System::Windows::Forms::Cursors::SizeNESW;
+		break;
+	}
+	case LEFT_BOTTOM:
+	{
+		pictureBox->Cursor = System::Windows::Forms::Cursors::SizeNESW;
+		break;
+	}
+	case RIGHT_BOTTOM:
+	{
+		pictureBox->Cursor = System::Windows::Forms::Cursors::SizeNWSE;
+		break;
+	}
+	case RESIZE_LINE:
+	{
+		
+		pictureBox->Cursor = System::Windows::Forms::Cursors::Hand;
+		break;
+	}
+	}
+
+}
+
 
 private: System::Void Controller_Load(System::Object^ sender, System::EventArgs^ e) {
 	curType = POINTER;
@@ -760,6 +839,10 @@ private: System::Void Controller_Load(System::Object^ sender, System::EventArgs^
 	selectedRect.top = -1;
 	saveToBMP = false;
 	curSelectedFunc = nullptr;
+	isMove = false;
+	curWriteType = NOT_WRITE;
+
+	//readFromFile(head,)
 	
 }
 private: System::Void pictureBox_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
@@ -880,6 +963,8 @@ private: System::Void pictureBox_MouseDown(System::Object^ sender, System::Windo
 
 	if (curType != POINTER) {
 		cleanList(selectedHead);
+		curSelectedFunc = nullptr;
+
 	}
 
 	if ((curType == POINTER) && (curEditMode == NOT_EDIT)) {
@@ -907,7 +992,7 @@ private: System::Void pictureBox_MouseDown(System::Object^ sender, System::Windo
 	else
 		curDrawMode = DRAW;
 
-	if (curType != POINTER) {
+	if ((curType != POINTER) && (curEditMode == NOT_EDIT)) {
 		isChanged = true;
 		if (curType != LINE) {
 			
@@ -919,11 +1004,20 @@ private: System::Void pictureBox_MouseDown(System::Object^ sender, System::Windo
 			curDrawMode = DRAW_LINE;
 		}
 	}
-
-	if (curType == POINTER) {
-		curSelectedFunc = hitTest(head, Point(e->X, e->Y));
+	else
+	{
+		startX = e->X;
+		startY = e->Y;
 	}
 
+	if (curType == POINTER) {
+		cleanList(selectedHead);
+		curSelectedFunc = hitTest(head, Point(e->X, e->Y));
+		
+	}
+
+	isMove = true;
+	curWriteType = NOT_WRITE;
 }
 private: System::Void pictureBox_MouseMove(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
 
@@ -935,21 +1029,53 @@ private: System::Void pictureBox_MouseMove(System::Object^ sender, System::Windo
 		return;
 	}
 
+
+	if ((curType == POINTER) && (curDrawMode == NOT_DRAW)) {
+		curEditMode = getCurEditMode(head, curSelectedFunc, Point(e->X, e->Y));
+		changeCursor(curEditMode);
+
+
+		if ((curSelectedFunc != nullptr) || (selectedHead->next != nullptr)) {
+			// if we have selected func we will show it
+			//pictureBox->Invalidate();
+		}
+
+	}
+
+	if ((curDrawMode == DRAW) && (curEditMode != NOT_EDIT)) {
+
+		if ((curType == POINTER) && (isMove)) {
+
+			
+			isMove = true;
+		
+		List^ cur = selectedHead->next;
+		if ((curSelectedFunc != nullptr) && (cur==nullptr))
+			transformFunc(curSelectedFunc, Point(e->X, e->Y), Point(startX, startY), curEditMode);
+			else
+			while (cur != nullptr) {
+				transformFunc(cur, Point(e->X, e->Y), Point(startX, startY), MOVE);
+				cur = cur->next;
+			}
+		}
+
+		startX = e->X;
+		startY = e->Y;
+
+		if (curEditMode != NOT_EDIT) 
+			pictureBox->Invalidate();
+
+	}
+
+
 	if ((curDrawMode == DRAW_LINE) && (curType == LINE)) {
 		pictureBox->Invalidate();
 		curX = e->X;
 		curY = e->Y;
 	}
 
-	if ((curType == POINTER) && (curDrawMode == NOT_DRAW)) {
-		if ((curSelectedFunc != nullptr) || (selectedHead->next != nullptr)) {
-			// if we have selected func we will show it
-			pictureBox->Invalidate();
-		}
-	}
 
-	if (curType != POINTER) 
-		cleanList(selectedHead);
+	
 }
 private: System::Void pictureBox_MouseUp(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
 	if ((curType == POINTER) && (curEditMode == NOT_EDIT)) {
@@ -960,29 +1086,70 @@ private: System::Void pictureBox_MouseUp(System::Object^ sender, System::Windows
 	if (curDrawMode != DRAW_LINE) {
 		curDrawMode = NOT_DRAW;
 	}
+
+	if (isMove) {
+		isMove = false;
+	}
+
+	if ((curSelectedFunc != nullptr) && (curSelectedFunc->fig->type != LINE))
+		makeFuncOnOneLine(head, curSelectedFunc);
+	else if ((curElement != nullptr) && (curElement->fig->type != LINE))
+		makeFuncOnOneLine(head, curElement);
+
+	if ((curSelectedFunc != nullptr) && (curSelectedFunc->fig->type == LINE))
+		makePointOnCenter(head, curSelectedFunc);
+	else if ((curElement != nullptr) && (curElement->fig->type == LINE))
+		makePointOnCenter(head, curElement);
+
 	pictureBox->Invalidate();
+
 }
 
 
 
 private: System::Void Controller_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e) {
-	if (curSelectedFunc != nullptr) {
-		pushExistingFunc(selectedHead, curSelectedFunc->fig);
-	}
-	if (e->KeyCode == System::Windows::Forms::Keys::Delete) {
-		List^ cur = selectedHead->next;
-		while (cur!=nullptr)
-		{
-
-			deleteElement(head, cur);
-			cur = cur->next;
-			
+	if (curWriteType != WRITE) {
+		if (curSelectedFunc != nullptr) {
+			pushExistingFunc(selectedHead, curSelectedFunc->fig);
 		}
+		if (e->KeyCode == System::Windows::Forms::Keys::Delete) {
+			List^ cur = selectedHead->next;
+			while (cur != nullptr)
+			{
 
-		cleanList(selectedHead);
-		curSelectedFunc = nullptr;
-		pictureBox->Invalidate();
+				deleteElement(head, cur);
+				cur = cur->next;
+
+			}
+
+			cleanList(selectedHead);
+			curSelectedFunc = nullptr;
+			pictureBox->Invalidate();
+		}
 	}
+	else
+	{
+		if ((curSelectedFunc != nullptr) && (curSelectedFunc->fig->type != LINE)) {
+			RectFunc^ curF = (RectFunc^)curSelectedFunc->fig;
+			if (e->KeyValue == 13) {
+				curF->text += "\n";
+			} else if (e->KeyValue == 8){
+				if (curF->text->Length !=0)
+				curF->text = curF->text->Remove(curF->text->Length-1);
+			}
+			else if(e->KeyValue == 32) {
+				curF->text += " ";
+			}
+			else
+			curF->text += ((Char)e->KeyValue).ToString();
+			//8 delete | 13 enter | 32 space | 37 left | 39 right | 40 down | 38 up  
+			pictureBox->Invalidate();
+		}
+	}
+}
+private: System::Void pictureBox_DoubleClick(System::Object^ sender, System::EventArgs^ e) {
+	curWriteType = WRITE;
+	isMove = false;
 }
 };
 

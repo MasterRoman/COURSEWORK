@@ -35,3 +35,14 @@ void getSelectedFuncFromRect(List^, List^, Rect);
 int max(int, int);
 int min(int, int);
 void swap(int& first, int& second);
+
+void transformFunc(List^, System::Drawing::Point, System::Drawing::Point, EditMode);
+EditMode getCurEditMode(List^, List^, System::Drawing::Point);
+
+void saveToFile(List^, System::String^);
+
+bool readFromFile(List^, System::String^);
+
+void makeFuncOnOneLine(List^ head, List^ cur);
+void makeSmoothLine(List^ curLine, System::Drawing::Point newPoints, System::Drawing::Point prevPoints);
+void makePointOnCenter(List^ head, List^ curL);

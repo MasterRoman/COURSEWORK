@@ -1,6 +1,5 @@
 #include "PictureView.h"
 #include "DataTypes.h"
-#include "RectFunc.h"
 #define _USE_MATH_DEFINES
 #include <math.h>
 
@@ -115,4 +114,24 @@ void repaintSelectedFunc(System::Windows::Forms::PaintEventArgs^ e, List^ select
 			curP = curP->next;
 		}
 	}
+}
+
+
+void drawText(System::Windows::Forms::PaintEventArgs^ e,RectFunc^ cur) {
+	System::Drawing::RectangleF rectF = System::Drawing::RectangleF(cur->leftCoords.X,
+		cur->leftCoords.Y,
+		cur->rightCoords.X - cur->leftCoords.X,
+		cur->rightCoords.Y - cur->leftCoords.Y);
+	System::Drawing::Brush^ brush = gcnew System::Drawing::SolidBrush(System::Drawing::Color::Black);
+	System::Drawing::Font^ drawFont = gcnew System::Drawing::Font("Arial", 10);
+	System::Drawing::StringFormat^ drawFormat = gcnew System::Drawing::StringFormat();
+	if (!(cur->type == DATA))
+		drawFormat->Alignment = System::Drawing::StringAlignment::Center;
+	else
+		drawFormat->Alignment = System::Drawing::StringAlignment::Near;
+	drawFormat->LineAlignment = System::Drawing::StringAlignment::Center;
+	e->Graphics->DrawString(cur->text, drawFont, brush, rectF, drawFormat);
+	delete drawFont;
+	delete drawFormat;
+	delete brush;
 }

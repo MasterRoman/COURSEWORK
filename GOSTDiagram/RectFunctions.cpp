@@ -15,6 +15,7 @@ ProcessFunc::ProcessFunc(System::Drawing::Point points)
 	this->rightCoords.X = points.X + 44;
 	this->rightCoords.Y = points.Y + 24;
 	this->type = PROCESS;
+
 }
 
 ProcessFunc::~ProcessFunc()
@@ -25,7 +26,12 @@ void ProcessFunc::drawFigure(System::Windows::Forms::PaintEventArgs^ e,bool isVe
 	System::Drawing::Pen^ pen = gcnew System::Drawing::Pen(System::Drawing::Color::Black);
 	pen->Width = 2.0f;
 
-	e->Graphics->DrawRectangle(pen, this->leftCoords.X, this->leftCoords.Y,88,48);
+	e->Graphics->DrawRectangle(pen, this->leftCoords.X, this->leftCoords.Y, (this->rightCoords.X - this->leftCoords.X),(this->rightCoords.Y - this->leftCoords.Y));
+
+	if (text != nullptr) {
+		drawText(e, this);
+	}
+	
 
 	if (isVertex) {
 		drawVertex(e, System::Drawing::Point(this->leftCoords.X, this->leftCoords.Y), System::Drawing::Color::Black);
@@ -49,6 +55,7 @@ DecissionFunc::DecissionFunc(System::Drawing::Point points)
 	this->rightCoords.X = points.X + 44;
 	this->rightCoords.Y = points.Y + 24;
 	this->type = DECISSION;
+
 }
 
 DecissionFunc::~DecissionFunc()
@@ -60,12 +67,16 @@ void DecissionFunc::drawFigure(System::Windows::Forms::PaintEventArgs^ e, bool i
 	System::Drawing::Pen^ pen = gcnew System::Drawing::Pen(System::Drawing::Color::Black);
 	pen->Width = 2.0f;
 	array<System::Drawing::Point>^ poligonPoints = gcnew array<System::Drawing::Point>{
-		System::Drawing::Point(this->leftCoords.X, this->leftCoords.Y + 24),
-		System::Drawing::Point(this->leftCoords.X + 44, (int)this->leftCoords.Y), 
-		System::Drawing::Point(this->rightCoords.X, (int)this->leftCoords.Y + 24),
-		System::Drawing::Point(this->rightCoords.X - 44, (int)this->rightCoords.Y)};
+		System::Drawing::Point(this->leftCoords.X, this->leftCoords.Y + (this->rightCoords.Y - this->leftCoords.Y) / 2),
+		System::Drawing::Point(this->leftCoords.X + (this->rightCoords.X- this->leftCoords.X)/2, (int)this->leftCoords.Y),
+		System::Drawing::Point(this->rightCoords.X, (int)this->leftCoords.Y + (this->rightCoords.Y - this->leftCoords.Y) / 2),
+		System::Drawing::Point(this->rightCoords.X - (this->rightCoords.X - this->leftCoords.X) / 2, (int)this->rightCoords.Y)};
 	e->Graphics->DrawPolygon(pen,poligonPoints);
 	
+	if (text != nullptr) {
+		drawText(e, this);
+	}
+
 	if (isVertex) {
 		drawVertex(e, System::Drawing::Point(this->leftCoords.X, this->leftCoords.Y), System::Drawing::Color::Black);
 		drawVertex(e, System::Drawing::Point(this->rightCoords.X, this->leftCoords.Y), System::Drawing::Color::Black);
@@ -74,7 +85,7 @@ void DecissionFunc::drawFigure(System::Windows::Forms::PaintEventArgs^ e, bool i
 	}
 	delete pen;
 	delete poligonPoints;
-
+	
 }
 
 TerminatorFunc::TerminatorFunc()
@@ -100,11 +111,20 @@ void TerminatorFunc::drawFigure(System::Windows::Forms::PaintEventArgs^ e, bool 
 	System::Drawing::Pen^ pen = gcnew System::Drawing::Pen(System::Drawing::Color::Black);
 	pen->Width = 2.0f;
 
-	e->Graphics->DrawArc(pen, this->leftCoords.X, this->leftCoords.Y,30,32, 90, 180);
-	e->Graphics->DrawLine(pen, this->leftCoords.X+16, this->leftCoords.Y+1, this->leftCoords.X + 72, this->leftCoords.Y);
-	e->Graphics->DrawArc(pen, this->rightCoords.X-32, this->leftCoords.Y, 30, 32,90,-180);
-	e->Graphics->DrawLine(pen, this->leftCoords.X+16, this->rightCoords.Y, this->leftCoords.X + 72, this->rightCoords.Y);
-	
+	e->Graphics->DrawArc(pen, this->leftCoords.X, this->leftCoords.Y, ((this->rightCoords.X - this->leftCoords.X)*(4.0 / 11.0)),
+		(this->rightCoords.Y - this->leftCoords.Y), 90, 180);
+	e->Graphics->DrawLine(pen, this->leftCoords.X + (this->rightCoords.X - this->leftCoords.X) / 6,
+		this->leftCoords.Y+1, this->rightCoords.X - (this->rightCoords.X - this->leftCoords.X) / 6, this->leftCoords.Y+1);
+	e->Graphics->DrawArc(pen, this->rightCoords.X- ((this->rightCoords.X - this->leftCoords.X)*(4.0/11.0)), this->leftCoords.Y,
+		((this->rightCoords.X - this->leftCoords.X) * (4.0 / 11.0)),
+		(this->rightCoords.Y - this->leftCoords.Y),90,-180);
+	e->Graphics->DrawLine(pen, this->leftCoords.X+ (this->rightCoords.X - this->leftCoords.X)/6, this->rightCoords.Y,
+		this->rightCoords.X - (this->rightCoords.X - this->leftCoords.X)/6, this->rightCoords.Y);
+
+	if (text != nullptr) {
+		drawText(e, this);
+	}
+
 	if (isVertex) {
 		drawVertex(e, System::Drawing::Point(this->leftCoords.X, this->leftCoords.Y), System::Drawing::Color::Black);
 		drawVertex(e, System::Drawing::Point(this->rightCoords.X, this->leftCoords.Y), System::Drawing::Color::Black);
@@ -112,6 +132,8 @@ void TerminatorFunc::drawFigure(System::Windows::Forms::PaintEventArgs^ e, bool 
 		drawVertex(e, System::Drawing::Point(this->leftCoords.X, this->rightCoords.Y), System::Drawing::Color::Black);
 	}
 	delete pen;
+
+	
 	
 }
 
@@ -144,6 +166,10 @@ void DataFunc::drawFigure(System::Windows::Forms::PaintEventArgs^ e, bool isVert
 			System::Drawing::Point(this->leftCoords.X - 29, this->rightCoords.Y)};
 	e->Graphics->DrawPolygon(pen, poligonPoints);
 
+	if (text != nullptr) {
+		drawText(e, this);
+	}
+
 	if (isVertex) {
 		drawVertex(e, System::Drawing::Point(this->leftCoords.X, this->leftCoords.Y), System::Drawing::Color::Black);
 		drawVertex(e, System::Drawing::Point(this->rightCoords.X, this->leftCoords.Y), System::Drawing::Color::Black);
@@ -152,6 +178,9 @@ void DataFunc::drawFigure(System::Windows::Forms::PaintEventArgs^ e, bool isVert
 	}
 	delete pen;
 	delete poligonPoints;
+
+
+	
 }
 
 
@@ -176,7 +205,12 @@ PageRefFunc::~PageRefFunc()
 void PageRefFunc::drawFigure(System::Windows::Forms::PaintEventArgs^ e, bool isVertex) {
 	System::Drawing::Pen^ pen = gcnew System::Drawing::Pen(System::Drawing::Color::Black);
 	pen->Width = 2.0f;
-	e->Graphics->DrawEllipse(pen, this->leftCoords.X, this->leftCoords.Y, 32, 32);
+	e->Graphics->DrawEllipse(pen, this->leftCoords.X, this->leftCoords.Y, (this->rightCoords.X - this->leftCoords.X), 
+		(this->rightCoords.Y - this->leftCoords.Y));
+	if (text != nullptr) {
+		drawText(e, this);
+	}
+
 	
 	if (isVertex) {
 		drawVertex(e, System::Drawing::Point(this->leftCoords.X, this->leftCoords.Y), System::Drawing::Color::Black);
@@ -187,4 +221,5 @@ void PageRefFunc::drawFigure(System::Windows::Forms::PaintEventArgs^ e, bool isV
 
 	delete pen;
 	
+
 }
