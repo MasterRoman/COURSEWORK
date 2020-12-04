@@ -223,3 +223,39 @@ void PageRefFunc::drawFigure(System::Windows::Forms::PaintEventArgs^ e, bool isV
 	
 
 }
+
+TextFunc::TextFunc() {
+
+}
+
+TextFunc::TextFunc(System::Drawing::Point points)
+{
+	this->leftCoords.X = points.X - 44;
+	this->leftCoords.Y = points.Y - 24;
+	this->rightCoords.X = points.X + 44;
+	this->rightCoords.Y = points.Y + 24;
+	this->type = PROCESS;
+
+}
+
+TextFunc::~TextFunc()
+{
+}
+
+void TextFunc::drawFigure(System::Windows::Forms::PaintEventArgs^ e, bool isVertex) {
+	System::Drawing::Pen^ pen = gcnew System::Drawing::Pen(System::Drawing::Color::Black);
+	pen->Width = 2.0f;
+
+	if (text != nullptr) {
+		drawText(e, this);
+	}
+
+	if (isVertex) {
+		drawVertex(e, System::Drawing::Point(this->leftCoords.X, this->leftCoords.Y), System::Drawing::Color::Black);
+		drawVertex(e, System::Drawing::Point(this->rightCoords.X, this->leftCoords.Y), System::Drawing::Color::Black);
+		drawVertex(e, System::Drawing::Point(this->leftCoords.X, this->rightCoords.Y), System::Drawing::Color::Black);
+		drawVertex(e, System::Drawing::Point(this->rightCoords.X, this->rightCoords.Y), System::Drawing::Color::Black);
+	}
+	delete pen;
+
+}

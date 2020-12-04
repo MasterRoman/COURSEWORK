@@ -21,6 +21,19 @@ void cleanList(List^ head) {
 	while (cur!=nullptr)
 	{
 		temp = cur;
+	/*	if (temp->fig->type == LINE) {
+			LineFunc^ line = (LineFunc^)temp->fig;
+			Points* points = line->headLine->next;
+			Points* tempP;
+			while (points != nullptr) {
+				tempP = points;
+				points = points->next;
+				delete tempP;
+			}
+			delete line->headLine;
+		}*/
+		
+		delete temp->fig;
 		delete temp;
 		cur = cur->next;
 	}
@@ -42,7 +55,7 @@ List^ push(List^ head, FunctionType fType, System::Drawing::Point points){
 	return cur;
 }
 
-void pushExistingFunc(List^ head, AbstractFigure^ element) {
+List^ pushExistingFunc(List^ head, AbstractFigure^ element) {
 	List^ cur = head;
 	while (cur->next != nullptr)
 	{
@@ -52,8 +65,21 @@ void pushExistingFunc(List^ head, AbstractFigure^ element) {
 	cur = cur->next;
 	cur->next = nullptr;
 	cur->fig = element;
-
+	return cur;
 }
+
+
+bool isElementInList(List^ head , List^ el) {
+
+	List^ cur = head->next;
+	while (cur != nullptr){
+		if (cur->fig == el->fig)
+			return true;
+		cur = cur->next;
+	}
+	return false;
+}
+
 
 void deleteElement(List^ head, List^ elementToDelete) {
 	List^ cur = head;
@@ -94,7 +120,7 @@ AbstractFigure^ figureFromType(FunctionType fType, System::Drawing::Point points
 
 		//Write logic!!!
 	case TEXT:
-		//cur =
+		cur = gcnew TextFunc(points);
 		break;
 	}
 	
@@ -261,6 +287,7 @@ void getSelectedFuncFromRect(List^ head, List^ selectedHead, Rect rect) {
 					(curP->y < rect.top) && (curP->y > rect.bottom)) {
 					//push figure
 					pushExistingFunc(selectedHead, curL);
+					break;
 				}
 
 				curP = curP->next;
@@ -629,9 +656,12 @@ void makeSmoothLine(List^ curLine, System::Drawing::Point newPoints, System::Dra
 void makePointOnCenter(List^ head, List^ curL) {
 bool fF = false;
 bool fE = false;
+Points pP;
 	List^  cur = head->next;
 	LineFunc^ line = (LineFunc^)curL->fig;
 	Points *curP = line->headLine->next;
+	if (curP == nullptr)
+		return;
 	Points *curPF = curP;
 	while (curP->next != nullptr)
 {
@@ -653,26 +683,28 @@ Points*  curPE = curP;
 		(abs(curPF->x - curX) <= (closeObject+3 )) && (!fF)) 
 	{
 		fF = true;
-	Points* pP = curPF;
+	    pP.x = curPF->x;
+		pP.y = curPF->y;
 	if (abs(curPF->y - curF->rightCoords.Y) <= (closeObject+3))
 		curPF->y = curF->rightCoords.Y;
 	else
 		curPF->y  = curF->leftCoords.Y;
 	curPF->x  = curX;
-	makeSmoothLine(curL, System::Drawing::Point(curPF->x,curPF->y), System::Drawing::Point(pP->x, pP->y));
+	makeSmoothLine(curL, System::Drawing::Point(curPF->x,curPF->y), System::Drawing::Point(pP.x, pP.y));
 	}
 	else if (((abs(curPE->y - curF->rightCoords.Y) <= (closeObject +3)) ||
 		(abs(curPE->y - curF->leftCoords.Y) <= (closeObject+3 ))) &&
 		(abs(curPE->x - curX) <= (closeObject+3 )) &&  (!fE))
 	{
 		fE = true;
-		Points* pP = curPE;
+		pP.x = curPE->x;
+		pP.y = curPE->y;
 		if (abs(curPE->y - curF->leftCoords.Y) <= (closeObject+3))
 			curPE->y = curF->leftCoords.Y;
 	else
 		curPE->y  = curF->rightCoords.Y;
 	curPE->x  = curX;
-	makeSmoothLine(curL, System::Drawing::Point(curPE->x, curPE->y), System::Drawing::Point(pP->x, pP->y));
+	makeSmoothLine(curL, System::Drawing::Point(curPE->x, curPE->y), System::Drawing::Point(pP.x, pP.y));
 	}
 		if (fF && fE)
 			return;

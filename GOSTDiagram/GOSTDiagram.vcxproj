@@ -127,6 +127,7 @@
     <ClCompile Include="PictureView.cpp" />
     <ClCompile Include="RectFunc.cpp" />
     <ClCompile Include="RectFunctions.cpp" />
+    <ClCompile Include="UndoStack.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractFigure.h" />
@@ -139,6 +140,7 @@
     <ClInclude Include="PictureView.h" />
     <ClInclude Include="RectFunc.h" />
     <ClInclude Include="RectFunctions.h" />
+    <ClInclude Include="UndoStack.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Controller.resx">

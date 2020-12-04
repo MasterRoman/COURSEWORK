@@ -63,4 +63,15 @@ private:
 
 };
 
+ref class TextFunc : RectFunc
+{
+public:
+	TextFunc();
+	TextFunc(System::Drawing::Point);
+	~TextFunc();
+	void drawFigure(System::Windows::Forms::PaintEventArgs^ e, bool isVertex) override;
+private:
+
+};
+
 

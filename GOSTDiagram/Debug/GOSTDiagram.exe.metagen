@@ -23,3 +23,5 @@ Class GOSTDiagram.Controller: AutoLayout, AnsiClass, Class, Public, BeforeFieldI
     List curElement : Public
     List curSelectedFunc : Public
     List selectedHead : Public
+    List copyHead : Public
+    UndoStack stackHead : Public

@@ -21,8 +21,7 @@ enum TDrawMode
 {
 	DRAW,
 	NOT_DRAW,
-	DRAW_LINE,
-	WRITE_TEXT
+	DRAW_LINE
 };
 
 

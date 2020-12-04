@@ -9,6 +9,7 @@
 #include "RectFunc.h"
 #include "AbstractFigure.h"
 #include "FigureModel.h"
+#include "UndoStack.h"
 
 FunctionType curType;
 EditMode curEditMode;
@@ -43,6 +44,9 @@ namespace GOSTDiagram {
 		List^ curElement;	
 		List^ curSelectedFunc;
 		List^ selectedHead;
+		List^ copyHead;
+		UndoStack^ stackHead;
+		
 		Controller(void)
 		{
 			InitializeComponent();
@@ -54,6 +58,8 @@ namespace GOSTDiagram {
 			this->selectedHead = initList(selectedHead);
 			this->curElement = nullptr;
 			this->curSelectedFunc = nullptr;
+			this->copyHead = initList(copyHead);
+			this->stackHead = stackInit(stackHead);
 		}
 		
 	protected:
@@ -69,8 +75,10 @@ namespace GOSTDiagram {
 			cleanList(head);
 			cleanList(selectedHead);
 			delete head;
+			delete copyHead;
 			delete selectedHead;
 			delete curPath;
+			delete stackHead;
 		}
 	private: System::Windows::Forms::MenuStrip^ menuStrip;
 	private: System::Windows::Forms::ToolStripMenuItem^ FileStripMenuItem;
@@ -94,7 +102,7 @@ namespace GOSTDiagram {
 
 	private: System::Windows::Forms::ToolStripMenuItem^ FileExitMenuItem;
 
-	private: System::Windows::Forms::ToolStripMenuItem^ HelpStripMenuItem;
+
 	private: System::Windows::Forms::ImageList^ MenuImageList;
 
 
@@ -164,7 +172,6 @@ namespace GOSTDiagram {
 			this->EditUndoMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->EditCopyMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->EditInsertMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->HelpStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->MenuImageList = (gcnew System::Windows::Forms::ImageList(this->components));
 			this->toolStripMenu = (gcnew System::Windows::Forms::ToolStrip());
 			this->toolStripNewButton = (gcnew System::Windows::Forms::ToolStripButton());
@@ -202,9 +209,9 @@ namespace GOSTDiagram {
 			// menuStrip
 			// 
 			this->menuStrip->ImageScalingSize = System::Drawing::Size(15, 15);
-			this->menuStrip->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
+			this->menuStrip->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
 				this->FileStripMenuItem,
-					this->EditStripMenuItem, this->HelpStripMenuItem
+					this->EditStripMenuItem
 			});
 			this->menuStrip->Location = System::Drawing::Point(0, 0);
 			this->menuStrip->Name = L"menuStrip";
@@ -291,28 +298,28 @@ namespace GOSTDiagram {
 			// 
 			this->EditUndoMenuItem->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"EditUndoMenuItem.Image")));
 			this->EditUndoMenuItem->Name = L"EditUndoMenuItem";
-			this->EditUndoMenuItem->Size = System::Drawing::Size(176, 26);
+			this->EditUndoMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::Z));
+			this->EditUndoMenuItem->Size = System::Drawing::Size(227, 26);
 			this->EditUndoMenuItem->Text = L"Отменить";
+			this->EditUndoMenuItem->Click += gcnew System::EventHandler(this, &Controller::EditUndoMenuItem_Click);
 			// 
 			// EditCopyMenuItem
 			// 
 			this->EditCopyMenuItem->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"EditCopyMenuItem.Image")));
 			this->EditCopyMenuItem->Name = L"EditCopyMenuItem";
-			this->EditCopyMenuItem->Size = System::Drawing::Size(176, 26);
+			this->EditCopyMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::C));
+			this->EditCopyMenuItem->Size = System::Drawing::Size(227, 26);
 			this->EditCopyMenuItem->Text = L"Копировать";
+			this->EditCopyMenuItem->Click += gcnew System::EventHandler(this, &Controller::EditCopyMenuItem_Click);
 			// 
 			// EditInsertMenuItem
 			// 
 			this->EditInsertMenuItem->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"EditInsertMenuItem.Image")));
 			this->EditInsertMenuItem->Name = L"EditInsertMenuItem";
-			this->EditInsertMenuItem->Size = System::Drawing::Size(176, 26);
+			this->EditInsertMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::V));
+			this->EditInsertMenuItem->Size = System::Drawing::Size(227, 26);
 			this->EditInsertMenuItem->Text = L"Вставить";
-			// 
-			// HelpStripMenuItem
-			// 
-			this->HelpStripMenuItem->Name = L"HelpStripMenuItem";
-			this->HelpStripMenuItem->Size = System::Drawing::Size(83, 24);
-			this->HelpStripMenuItem->Text = L"Помощь";
+			this->EditInsertMenuItem->Click += gcnew System::EventHandler(this, &Controller::EditInsertMenuItem_Click);
 			// 
 			// MenuImageList
 			// 
@@ -401,6 +408,7 @@ namespace GOSTDiagram {
 			this->toolStripUndoButton->ImageTransparentColor = System::Drawing::Color::Magenta;
 			this->toolStripUndoButton->Name = L"toolStripUndoButton";
 			this->toolStripUndoButton->Size = System::Drawing::Size(29, 22);
+			this->toolStripUndoButton->Click += gcnew System::EventHandler(this, &Controller::toolStripUndoButton_Click);
 			// 
 			// toolStripCopyButton
 			// 
@@ -409,6 +417,7 @@ namespace GOSTDiagram {
 			this->toolStripCopyButton->ImageTransparentColor = System::Drawing::Color::Magenta;
 			this->toolStripCopyButton->Name = L"toolStripCopyButton";
 			this->toolStripCopyButton->Size = System::Drawing::Size(29, 22);
+			this->toolStripCopyButton->Click += gcnew System::EventHandler(this, &Controller::toolStripCopyButton_Click);
 			// 
 			// toolStripPasteButton
 			// 
@@ -417,6 +426,7 @@ namespace GOSTDiagram {
 			this->toolStripPasteButton->ImageTransparentColor = System::Drawing::Color::Magenta;
 			this->toolStripPasteButton->Name = L"toolStripPasteButton";
 			this->toolStripPasteButton->Size = System::Drawing::Size(29, 22);
+			this->toolStripPasteButton->Click += gcnew System::EventHandler(this, &Controller::toolStripPasteButton_Click);
 			// 
 			// toolStripFunctions
 			// 
@@ -553,6 +563,9 @@ namespace GOSTDiagram {
 			// 
 			// pictureBox
 			// 
+			this->pictureBox->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Left)
+				| System::Windows::Forms::AnchorStyles::Right));
 			this->pictureBox->Location = System::Drawing::Point(0, 0);
 			this->pictureBox->Name = L"pictureBox";
 			this->pictureBox->Size = System::Drawing::Size(1053, 500);
@@ -657,6 +670,8 @@ void actNew() {
 		isChanged = false;
 		curSelectedFunc = nullptr;
 		cleanList(head);
+		cleanStack(stackHead);
+		cleanList(copyHead);
 		pictureBox->Invalidate();
 	}
 	
@@ -680,6 +695,7 @@ void actOpen() {
 	if ((str->Length != 0) && (str->ToString() != "openFileDialog")) {
 		//open file 
 		cleanList(head);
+		cleanStack(stackHead);
 		curPath = str;
 		if (readFromFile(head, curPath)) {
 			isChanged = false;
@@ -980,7 +996,9 @@ private: System::Void pictureBox_MouseDown(System::Object^ sender, System::Windo
 
 		if (e->Button == System::Windows::Forms::MouseButtons::Left)
 		{
-			addPoints((LineFunc^)curElement->fig, Point(e->X, e->Y));
+		    addPoints((LineFunc^)curElement->fig, Point(e->X, e->Y));
+
+			pushStack(stackHead, curElement, POINT_ADD_UNDO,nullptr);
 			return;
 		} 
 		else if (e->Button == System::Windows::Forms::MouseButtons::Right) {
@@ -997,10 +1015,12 @@ private: System::Void pictureBox_MouseDown(System::Object^ sender, System::Windo
 		if (curType != LINE) {
 			
 			curElement = push(head, curType,Point(e->X,e->Y));
+			pushStack(stackHead, curElement, FIGURE_INSERT_UNDO, nullptr);
 		}
 		else if (curDrawMode != DRAW_LINE)
 		{
 			curElement = addLine(head, Point(e->X, e->Y));
+			pushStack(stackHead, curElement, FIGURE_INSERT_UNDO, nullptr);
 			curDrawMode = DRAW_LINE;
 		}
 	}
@@ -1011,12 +1031,15 @@ private: System::Void pictureBox_MouseDown(System::Object^ sender, System::Windo
 	}
 
 	if (curType == POINTER) {
-		cleanList(selectedHead);
+	
 		curSelectedFunc = hitTest(head, Point(e->X, e->Y));
+		if (!(isElementInList(selectedHead,curSelectedFunc))) {
+			cleanList(selectedHead);
+		}
 		
 	}
 
-	isMove = true;
+
 	curWriteType = NOT_WRITE;
 }
 private: System::Void pictureBox_MouseMove(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
@@ -1043,13 +1066,63 @@ private: System::Void pictureBox_MouseMove(System::Object^ sender, System::Windo
 	}
 
 	if ((curDrawMode == DRAW) && (curEditMode != NOT_EDIT)) {
-
-		if ((curType == POINTER) && (isMove)) {
-
-			
-			isMove = true;
-		
 		List^ cur = selectedHead->next;
+		if ((curType == POINTER) && (!isMove)) {
+			isMove = true;
+			if ((cur == nullptr) && (curSelectedFunc != nullptr)) {
+
+				if (curSelectedFunc->fig->type != LINE) {
+					RectFunc^ curF = (RectFunc^)curSelectedFunc->fig;
+					String^ str = pointsToStr(curF->leftCoords);
+					str += pointsToStr(curF->rightCoords);
+					pushStack(stackHead, curSelectedFunc, FUNC_MOVE_UNDO, str);
+
+				}
+				else
+				{
+					LineFunc^ curL = (LineFunc^)curSelectedFunc->fig;
+					Points* points = curL->headLine->next;
+					System::String^ res = "";
+					while (points != nullptr)
+					{
+						res += pointsToStr(System::Drawing::Point(points->x, points->y));
+						points = points->next;
+					}
+
+					pushStack(stackHead, curSelectedFunc, LINE_MOVE_UNDO, res);
+				}
+			}
+			while (cur != nullptr)
+			{
+
+				if (cur->fig->type != LINE)
+				{
+					RectFunc^ curF = (RectFunc^)cur->fig;
+					String^ str = pointsToStr(curF->leftCoords);
+					str += pointsToStr(curF->rightCoords);
+					pushStack(stackHead, cur, FUNC_MOVE_UNDO, str);
+				}
+				else
+				{
+					LineFunc^ curL = (LineFunc^)cur->fig;
+					Points* points = curL->headLine->next;
+					System::String^ res = "";
+					while (points != nullptr)
+					{
+						res += pointsToStr(System::Drawing::Point(points->x, points->y));
+						points = points->next;
+					}
+
+					pushStack(stackHead, cur, LINE_MOVE_UNDO, res);
+				}
+
+				cur = cur->next;
+			}
+
+		}
+	
+		
+	    cur = selectedHead->next;
 		if ((curSelectedFunc != nullptr) && (cur==nullptr))
 			transformFunc(curSelectedFunc, Point(e->X, e->Y), Point(startX, startY), curEditMode);
 			else
@@ -1057,7 +1130,7 @@ private: System::Void pictureBox_MouseMove(System::Object^ sender, System::Windo
 				transformFunc(cur, Point(e->X, e->Y), Point(startX, startY), MOVE);
 				cur = cur->next;
 			}
-		}
+		
 
 		startX = e->X;
 		startY = e->Y;
@@ -1116,7 +1189,7 @@ private: System::Void Controller_KeyDown(System::Object^ sender, System::Windows
 			List^ cur = selectedHead->next;
 			while (cur != nullptr)
 			{
-
+				pushStack(stackHead, cur, DELETE_UNDO, nullptr);
 				deleteElement(head, cur);
 				cur = cur->next;
 
@@ -1150,6 +1223,104 @@ private: System::Void Controller_KeyDown(System::Object^ sender, System::Windows
 private: System::Void pictureBox_DoubleClick(System::Object^ sender, System::EventArgs^ e) {
 	curWriteType = WRITE;
 	isMove = false;
+	cleanList(selectedHead);
+}
+
+
+void actCopy() {
+	
+	cleanList(copyHead);
+	List^ cur = selectedHead->next;
+	while (cur != nullptr) {
+		pushExistingFunc(copyHead, cur->fig);
+		cur = cur->next;
+	}
+
+}
+
+int copyShift = 25;
+
+void actPaste() {
+
+	if (copyHead->next == nullptr) {
+		return;
+	}
+	List^ curCopy = copyHead->next;
+	cleanList(selectedHead);
+	while (curCopy != nullptr) {
+		if (curCopy->fig->type == LINE) {
+			LineFunc^ absL = gcnew LineFunc();
+			LineFunc^ copyL = (LineFunc^)curCopy->fig;
+			absL->headLine = new Points;
+			absL->headLine->next = nullptr;
+			absL->width = copyL->width;
+			Points* points = copyL->headLine->next;
+			while (points != nullptr) {
+				addPoints(absL, System::Drawing::Point(points->x + copyShift, points->y + copyShift));
+				points = points->next;
+			}
+			pushExistingFunc(head, (AbstractFigure^)absL);
+			List^ curL = pushExistingFunc(selectedHead, (AbstractFigure^)absL);
+			pushStack(stackHead, curL, FIGURE_INSERT_UNDO, nullptr);
+		}
+		else {
+			AbstractFigure^ absF = figureFromType(curCopy->fig->type, System::Drawing::Point(0, 0));
+			RectFunc^ rectF = (RectFunc^)absF;
+			RectFunc^ copyF = (RectFunc^)curCopy->fig;
+			rectF->leftCoords.X = copyF->leftCoords.X + copyShift;
+			rectF->leftCoords.Y = copyF->leftCoords.Y + copyShift;
+			rectF->rightCoords.X = copyF->rightCoords.X + copyShift;
+			rectF->rightCoords.Y = copyF->rightCoords.Y + copyShift;
+			rectF->text = copyF->text;
+			pushExistingFunc(head, (AbstractFigure^)rectF);
+			List^ curL = pushExistingFunc(selectedHead, (AbstractFigure^)rectF);
+			pushStack(stackHead, curL, FIGURE_INSERT_UNDO, nullptr);
+		}
+		curCopy = curCopy->next;
+	}
+
+	pictureBox->Invalidate();
+}
+
+
+
+private: System::Void toolStripCopyButton_Click(System::Object^ sender, System::EventArgs^ e) {
+	EditCopyMenuItem_Click(sender,e);
+}
+private: System::Void toolStripPasteButton_Click(System::Object^ sender, System::EventArgs^ e) {
+	EditInsertMenuItem_Click(sender, e);
+}
+
+private: System::Void EditCopyMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+	actCopy();
+}
+private: System::Void EditInsertMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+	actPaste();
+}
+
+void actUndo(){
+
+	UndoStack^ cur = popStack(stackHead);
+	undoStackAction(cur, head);
+	if (cur != nullptr && cur->figure->fig->type == LINE) {
+		LineFunc^ line = (LineFunc^)cur->figure->fig;
+		if (line->headLine->next == nullptr) {
+			curDrawMode = NOT_DRAW;
+			deleteElement(head, cur->figure);
+		}
+	}
+	
+
+	cleanList(selectedHead);
+	curSelectedFunc = nullptr;
+	pictureBox->Invalidate();
+
+}
+private: System::Void EditUndoMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+	actUndo();
+}
+private: System::Void toolStripUndoButton_Click(System::Object^ sender, System::EventArgs^ e) {
+	EditUndoMenuItem_Click(sender, e);
 }
 };
 

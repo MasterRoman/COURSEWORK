@@ -1,10 +1,22 @@
-﻿  FigureModel.cpp
+﻿  Controller.cpp
 D:\COURSEWORK\GOSTDiagram\AbstractFigure.h(5,11): warning C4570: AbstractFigure: не был объявлен явно как абстрактный, однако содержит абстрактные функции
 D:\COURSEWORK\GOSTDiagram\AbstractFigure.h(5,11): message : void AbstractFigure::drawFigure(System::Windows::Forms::PaintEventArgs ^,bool): абстрактный
 D:\COURSEWORK\GOSTDiagram\AbstractFigure.h(8): message : см. объявление "AbstractFigure::drawFigure"
 D:\COURSEWORK\GOSTDiagram\RectFunc.h(3,11): warning C4570: RectFunc: не был объявлен явно как абстрактный, однако содержит абстрактные функции
 D:\COURSEWORK\GOSTDiagram\RectFunc.h(3,11): message : void RectFunc::drawFigure(System::Windows::Forms::PaintEventArgs ^,bool): абстрактный
 D:\COURSEWORK\GOSTDiagram\RectFunc.h(12): message : см. объявление "RectFunc::drawFigure"
-D:\COURSEWORK\GOSTDiagram\FigureModel.cpp(121,16): warning C4244: =: преобразование "float" в "int", возможна потеря данных
+D:\COURSEWORK\GOSTDiagram\Controller.h(43,13): warning C4677: head: сигнатура члена, не являющегося частным, содержит частный тип сборки "List"
+D:\COURSEWORK\GOSTDiagram\FigureModel.h(7): message : см. объявление "List"
+D:\COURSEWORK\GOSTDiagram\Controller.h(44,19): warning C4677: curElement: сигнатура члена, не являющегося частным, содержит частный тип сборки "List"
+D:\COURSEWORK\GOSTDiagram\FigureModel.h(7): message : см. объявление "List"
+D:\COURSEWORK\GOSTDiagram\Controller.h(45,24): warning C4677: curSelectedFunc: сигнатура члена, не являющегося частным, содержит частный тип сборки "List"
+D:\COURSEWORK\GOSTDiagram\FigureModel.h(7): message : см. объявление "List"
+D:\COURSEWORK\GOSTDiagram\Controller.h(46,21): warning C4677: selectedHead: сигнатура члена, не являющегося частным, содержит частный тип сборки "List"
+D:\COURSEWORK\GOSTDiagram\FigureModel.h(7): message : см. объявление "List"
+D:\COURSEWORK\GOSTDiagram\Controller.h(47,17): warning C4677: copyHead: сигнатура члена, не являющегося частным, содержит частный тип сборки "List"
+D:\COURSEWORK\GOSTDiagram\FigureModel.h(7): message : см. объявление "List"
+D:\COURSEWORK\GOSTDiagram\Controller.h(48,23): warning C4677: stackHead: сигнатура члена, не являющегося частным, содержит частный тип сборки "UndoStack"
+D:\COURSEWORK\GOSTDiagram\UndoStack.h(14): message : см. объявление "UndoStack"
+D:\COURSEWORK\GOSTDiagram\Controller.cpp(6,32): warning C4829: Возможно, неправильные параметры функции main. Рекомендуемый вариант - "int main(Platform::Array<Platform::String^>^ argv)"
   AbstractFigure.obj : обнаружен модуль MSIL; для MSIL последовательная компоновка отключена; выполняется полная компоновка
   GOSTDiagram.vcxproj -> D:\COURSEWORK\GOSTDiagram\Debug\GOSTDiagram.exe

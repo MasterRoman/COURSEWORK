@@ -16,7 +16,9 @@ List^ initList(List^);
 void cleanList(List^);
 
 List^ push(List^, FunctionType, System::Drawing::Point);
-void pushExistingFunc(List^, AbstractFigure^);
+List^ pushExistingFunc(List^, AbstractFigure^);
+
+bool isElementInList(List^, List^);
 
 void deleteElement(List^, List^);
 
@@ -40,8 +42,10 @@ void transformFunc(List^, System::Drawing::Point, System::Drawing::Point, EditMo
 EditMode getCurEditMode(List^, List^, System::Drawing::Point);
 
 void saveToFile(List^, System::String^);
-
 bool readFromFile(List^, System::String^);
+
+System::String^ pointsToStr(System::Drawing::Point points);
+System::Drawing::Point parseStringToPoints(System::String^& str);
 
 void makeFuncOnOneLine(List^ head, List^ cur);
 void makeSmoothLine(List^ curLine, System::Drawing::Point newPoints, System::Drawing::Point prevPoints);
