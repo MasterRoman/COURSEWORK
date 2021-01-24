@@ -1,11 +1,13 @@
 #pragma once
 #include "AbstractFigure.h"
-struct Points
+struct Points  // структура точек линии
 {
     int x, y;
     Points *next;
 };
+ 
 
+// класс линии 
 ref class LineFunc :
     public AbstractFigure
 {

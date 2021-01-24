@@ -8,30 +8,19 @@ using namespace std;
 int closeObject = 5;
 
 
-List^ initList(List^ head) {
+List^ initList(List^ head) {  //Создание списка
     head = gcnew List;
 	head->next = nullptr;
 
 	return head;
 }
 
-void cleanList(List^ head) {
+void cleanList(List^ head) {  //очистка списка
 	List^ temp = nullptr;
 	List^ cur = head->next;
 	while (cur!=nullptr)
 	{
 		temp = cur;
-	/*	if (temp->fig->type == LINE) {
-			LineFunc^ line = (LineFunc^)temp->fig;
-			Points* points = line->headLine->next;
-			Points* tempP;
-			while (points != nullptr) {
-				tempP = points;
-				points = points->next;
-				delete tempP;
-			}
-			delete line->headLine;
-		}*/
 		
 		delete temp->fig;
 		delete temp;
@@ -40,7 +29,7 @@ void cleanList(List^ head) {
 	head->next = nullptr;
 }
 
-List^ push(List^ head, FunctionType fType, System::Drawing::Point points){
+List^ push(List^ head, FunctionType fType, System::Drawing::Point points){  //добавление элемента в список 
 	List^ cur = head;
 	while (cur->next!=nullptr)
 	{
@@ -51,11 +40,11 @@ List^ push(List^ head, FunctionType fType, System::Drawing::Point points){
 	cur->next = nullptr;
 	//add figure 
 
-    cur->fig = figureFromType(fType,points);
+    cur->fig = figureFromType(fType,points);  //создание фигуры исходя из её типа 
 	return cur;
 }
 
-List^ pushExistingFunc(List^ head, AbstractFigure^ element) {
+List^ pushExistingFunc(List^ head, AbstractFigure^ element) { //добавление в список существующей фигуры
 	List^ cur = head;
 	while (cur->next != nullptr)
 	{
@@ -69,7 +58,7 @@ List^ pushExistingFunc(List^ head, AbstractFigure^ element) {
 }
 
 
-bool isElementInList(List^ head , List^ el) {
+bool isElementInList(List^ head , List^ el) {  //проверка содержится ли элемент в списке
 
 	List^ cur = head->next;
 	while (cur != nullptr){
@@ -81,8 +70,8 @@ bool isElementInList(List^ head , List^ el) {
 }
 
 
-void deleteElement(List^ head, List^ elementToDelete) {
-	List^ cur = head;
+void deleteElement(List^ head, List^ elementToDelete) {  //логическое удаление элемента из списка
+	List^ cur = head; 
 	List^ curEl;
 	while (cur->next!=nullptr)
 	{
@@ -97,7 +86,7 @@ void deleteElement(List^ head, List^ elementToDelete) {
 	}
 }
 
-AbstractFigure^ figureFromType(FunctionType fType, System::Drawing::Point points) {
+AbstractFigure^ figureFromType(FunctionType fType, System::Drawing::Point points) {  //создание фигуры на основе типа 
     RectFunc^ cur;
 	switch (fType)
 	{
@@ -117,8 +106,6 @@ AbstractFigure^ figureFromType(FunctionType fType, System::Drawing::Point points
 		cur = gcnew PageRefFunc(points);
 		break;
 
-
-		//Write logic!!!
 	case TEXT:
 		cur = gcnew TextFunc(points);
 		break;
@@ -130,7 +117,7 @@ AbstractFigure^ figureFromType(FunctionType fType, System::Drawing::Point points
 
 //Line Model
 
-List^ addLine(List^ head, System::Drawing::Point points) {
+List^ addLine(List^ head, System::Drawing::Point points) {  //создание линии
 	List^ cur = head;
 	while (cur->next != nullptr)
 	{
@@ -145,7 +132,7 @@ List^ addLine(List^ head, System::Drawing::Point points) {
 	line->headLine = new Points;
 	line->headLine->next = nullptr;
 	line->width = 2.0f;
-	addPoints(line,points);
+	addPoints(line,points);  //добавление точек
 
 	cur->fig = line;
 	
@@ -153,7 +140,7 @@ List^ addLine(List^ head, System::Drawing::Point points) {
 	return cur;
 }
 
-Points* addPoints(LineFunc^ line, System::Drawing::Point points) {
+Points* addPoints(LineFunc^ line, System::Drawing::Point points) { //добавление точек к существующей линии 
 	Points *cur = line->headLine;
 	while (cur->next != nullptr)
 	{
@@ -189,7 +176,7 @@ Points* addPoints(LineFunc^ line, System::Drawing::Point points) {
 	return cur;
 }
 
-List^ hitTest(List^ head, System::Drawing::Point points) {
+List^ hitTest(List^ head, System::Drawing::Point points) { //нахождение фигуры по клику на нее
 	int closeObject = 5;
 
 	if (head == nullptr) {
@@ -199,8 +186,8 @@ List^ hitTest(List^ head, System::Drawing::Point points) {
 	while (cur != nullptr)
 	{
 		if (cur->fig->type != LINE) {
-			RectFunc^ curF = (RectFunc^)cur->fig;
-			if ((points.X >= curF->leftCoords.X) && (points.X <= curF->rightCoords.X) && (points.Y >= curF->leftCoords.Y) &&
+			RectFunc^ curF = (RectFunc^)cur->fig;  
+			if ((points.X >= curF->leftCoords.X) && (points.X <= curF->rightCoords.X) && (points.Y >= curF->leftCoords.Y) && //анализируем область
 				(points.Y <= curF->rightCoords.Y)) {
 				return cur;
 			}
@@ -256,7 +243,7 @@ void swap(int &first, int &second) {
 	second = t;
 }
 
-void getSelectedFuncFromRect(List^ head, List^ selectedHead, Rect rect) {
+void getSelectedFuncFromRect(List^ head, List^ selectedHead, Rect rect) {  //обнаружение всех фигур из выделенной области
 	if (rect.right < rect.left) {
 		swap(rect.right, rect.left);
 	}
@@ -269,7 +256,7 @@ void getSelectedFuncFromRect(List^ head, List^ selectedHead, Rect rect) {
 	{
 		if (cur->fig->type != LINE) {
 			RectFunc^ curF = (RectFunc^)cur->fig;
-			if ((((curF->leftCoords.X > rect.left) && (curF->leftCoords.X < rect.right))
+			if ((((curF->leftCoords.X > rect.left) && (curF->leftCoords.X < rect.right)) // попала ли фигура в область
 				|| ((curF->rightCoords.X > rect.left)) && (curF->rightCoords.X < rect.right))
 				&& (((curF->leftCoords.Y < rect.top) && (curF->leftCoords.Y > rect.bottom)
 					) || ((curF->rightCoords.Y < rect.top) &&
@@ -283,9 +270,9 @@ void getSelectedFuncFromRect(List^ head, List^ selectedHead, Rect rect) {
 			Points* curP = curL->headLine->next;
 			while (curP != nullptr)
 			{
-				if ((curP->x > rect.left) && (curP->x < rect.right) &&
+				if ((curP->x > rect.left) && (curP->x < rect.right) &&  // попала ли точка линии в область
 					(curP->y < rect.top) && (curP->y > rect.bottom)) {
-					//push figure
+					//добавление фигуры
 					pushExistingFunc(selectedHead, curL);
 					break;
 				}
@@ -299,19 +286,17 @@ void getSelectedFuncFromRect(List^ head, List^ selectedHead, Rect rect) {
 
 
 void transformFunc(List^ cur, System::Drawing::Point startPoints, System::Drawing::Point endPoints, EditMode mode) {
-	int dX = endPoints.X - startPoints.X;
+	int dX = endPoints.X - startPoints.X;	//изменение положение/размеров фигур
 	int dY = endPoints.Y - startPoints.Y;
 	
 	if (cur != nullptr) {
-	
-	
 		switch (mode)
 		{
 		case MOVE:
 			{
 				
 				if (cur->fig->type != LINE) {
-					RectFunc^ curF = (RectFunc^)cur->fig;
+					RectFunc^ curF = (RectFunc^)cur->fig;  // перемещение фигуры 
 					curF->leftCoords.X -= dX;
 					curF->rightCoords.X -=  dX;
 					curF->leftCoords.Y -= dY;
@@ -323,7 +308,7 @@ void transformFunc(List^ cur, System::Drawing::Point startPoints, System::Drawin
 				Points* curP = curL->headLine->next;
 				while (curP != nullptr) {
 					
-					curP->x = curP->x - dX;
+					curP->x = curP->x - dX;    // перемещение линии 
 					curP->y = curP->y - dY;
 					curP = curP->next;
 					}
@@ -335,7 +320,7 @@ void transformFunc(List^ cur, System::Drawing::Point startPoints, System::Drawin
 			{
 				// смещаем верхнюю сторону
 				RectFunc^ curF = (RectFunc^)cur->fig;
-			//	if ((curF->leftCoords.Y - dY) < (curF->rightCoords.Y - 20))
+
 				curF->leftCoords.Y = curF->leftCoords.Y - dY;
 				break;
 			}
@@ -388,20 +373,12 @@ void transformFunc(List^ cur, System::Drawing::Point startPoints, System::Drawin
 				curF->rightCoords.Y = curF->rightCoords.Y - dY;
 					break;
 			}
-		case RESIZE_LINE:
-			{
-				LineFunc^ curL = (LineFunc^)cur->fig;
-			
-				
-				
-				break;
-			}
 		}
 	}
 }
 
 
-EditMode getCurEditMode(List^ head,List^ selectedFunc, System::Drawing::Point points) {
+EditMode getCurEditMode(List^ head,List^ selectedFunc, System::Drawing::Point points) {  // определяем текущий режим редактирования
 	if (head->next == nullptr)
 		return NOT_EDIT;
 
@@ -462,22 +439,11 @@ while (cur != nullptr) {
 		}
 	}
 	else
-	{
+	{  // для линии 
 		LineFunc^ curL = (LineFunc^)cur->fig;
 		Points* curP = curL->headLine->next;
 		while (curP != nullptr) {
 			
-			if ((selectedFunc != nullptr) && (curL == selectedFunc->fig)) {
-				//CHECK IT AGAIN 
-				
-				if ((abs(points.Y - curP->y) <= closeObject) &&
-					(abs(points.X - curP->x) <= closeObject)) {
-					
-					return RESIZE_LINE;
-				
-				}
-			}
-
 			if (curP->next != nullptr) 
 				if (((abs(points.Y - curP->y) <= closeObject) && // горизонтальная
 					(points.X >= min(curP->x, curP->next->x)) &&
@@ -496,27 +462,27 @@ return NOT_EDIT;
 
 }
 
-System::String^ pointsToStr(System::Drawing::Point points) {
+System::String^ pointsToStr(System::Drawing::Point points) { //перевод точек в строку 
 	System::String^ res = (points.X).ToString();
 	res = res + "|" + (points.Y).ToString()+"|";
 
 	return res;
 }
 
-void saveToFile(List^ head, System::String^ path) {
+void saveToFile(List^ head, System::String^ path) {   // сохранение в файл
 	List^ cur = head->next;
 	System::IO::StreamWriter^ file = gcnew  System::IO::StreamWriter(path);
-	file->WriteLine("RKZFILE");
+	file->WriteLine("RKZFILE");    // уникальное начало файла
 	while (cur!=nullptr)
 	{
 		if (cur->fig->type != LINE) {
 			RectFunc^ curF = (RectFunc^)cur->fig;
 			
 			System::String^ res = "";
-			res += functionTypeToString(curF->type) + "|";
-			res += curF->text + "|";
+			res += functionTypeToString(curF->type) + "|";    // помещаем тип 
+			res += curF->text + "|";						 // помещаем тест 
 			res += pointsToStr(curF->leftCoords);
-			res += pointsToStr(curF->rightCoords);
+			res += pointsToStr(curF->rightCoords);			// помещаем координаты  
 			file->WriteLine(res);
 		}
 		else
@@ -524,10 +490,10 @@ void saveToFile(List^ head, System::String^ path) {
 			LineFunc^ line = (LineFunc^)cur->fig;
 			Points* points = line->headLine->next;
 			System::String^ res = "";
-			res += functionTypeToString(line->type) + "|";
+			res += functionTypeToString(line->type) + "|";    // помещаем тип 
 			while (points!=nullptr)
 			{
-				res += pointsToStr(System::Drawing::Point(points->x, points->y));
+				res += pointsToStr(System::Drawing::Point(points->x, points->y));   // помещаем координаты  
 				points = points->next;
 			}
 			
@@ -541,31 +507,31 @@ void saveToFile(List^ head, System::String^ path) {
 	
 }
 
-System::Drawing::Point parseStringToPoints(System::String^  &str) {
+System::Drawing::Point parseStringToPoints(System::String^  &str) {  //выделяем из строки точки 
 	System::Drawing::Point points;
 	int pos = str->IndexOf("|");
 	int len = str->Length - pos;
 	System::String^ temp = str->Remove(pos, len);
 	str = str->Remove(0, pos + 1);
-	points.X = int::Parse(temp);
+	points.X = int::Parse(temp);    //по Х 
     pos = str->IndexOf("|");
     len = str->Length - pos;
 	temp = str->Remove(pos, len);
 	str = str->Remove(0, pos + 1);
-	points.Y = int::Parse(temp);
+	points.Y = int::Parse(temp);   //по У
 	return points;
 }
 
-bool readFromFile(List^ head, System::String^ path) {
+bool readFromFile(List^ head, System::String^ path) {   //чтение из файла 
 	System::String^ res = "";
 	if (System::IO::File::Exists(path)) {
 		System::IO::StreamReader^ file = gcnew  System::IO::StreamReader(path);
 		res = file->ReadLine();
-		if (res == "RKZFILE") {
+		if (res == "RKZFILE") {   //определяем есть ли уникальная метка файла 
 			while (!file->EndOfStream)
 			{
 				res = file->ReadLine();
-				switch ((FunctionType)(res[0] - '0'))
+				switch ((FunctionType)(res[0] - '0'))  // выделяем тип фигуры 
 				{
 				case LINE:{
 					    res = res->Remove(0, 2);
@@ -576,8 +542,8 @@ bool readFromFile(List^ head, System::String^ path) {
 						}
 
 						break;
-					}
-				default:
+					} 
+				default:  //если не линия,то прямоугольная фигура 
 					AbstractFigure^ fig = figureFromType((FunctionType)(res[0]-'0'), System::Drawing::Point(0, 0));
 					fig->type = (FunctionType)(res[0] - '0');
 					res = res->Remove(0, 2);
@@ -601,7 +567,7 @@ bool readFromFile(List^ head, System::String^ path) {
 			return true;
 		}
 		else {
-			file->Close();
+			file->Close();   // ошибки в случае неверной метки
 			System::Windows::Forms::MessageBox::Show("Не верный формат или файл поврежден", "Ошибка!",
 				System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Warning);
 			return false;
@@ -611,7 +577,7 @@ bool readFromFile(List^ head, System::String^ path) {
 	return false;
 }
 
-void makeFuncOnOneLine(List^ head, List^ cur) {
+void makeFuncOnOneLine(List^ head, List^ cur) {   // автоматическое выравнивание фигуры по вертикали к существующим
 	RectFunc^ cFunc = (RectFunc ^)cur->fig;
 	int curX = cFunc->leftCoords.X + (cFunc->rightCoords.X - cFunc->leftCoords.X) / 2;
 	List^ curL = head->next;
@@ -634,7 +600,7 @@ void makeFuncOnOneLine(List^ head, List^ cur) {
 	}
 }
 
-void makeSmoothLine(List^ curLine, System::Drawing::Point newPoints, System::Drawing::Point prevPoints) {
+void makeSmoothLine(List^ curLine, System::Drawing::Point newPoints, System::Drawing::Point prevPoints) {  //выравнивание линии при автоматическом изменении координат её точек 
 	LineFunc^ line = (LineFunc^)curLine->fig;
 	Points* curP = line->headLine->next;
 	while (curP != nullptr) {
@@ -653,7 +619,7 @@ void makeSmoothLine(List^ curLine, System::Drawing::Point newPoints, System::Dra
 	}
 }
 
-void makePointOnCenter(List^ head, List^ curL) {
+void makePointOnCenter(List^ head, List^ curL) { // крепление линии к центру фигуры 
 bool fF = false;
 bool fE = false;
 Points pP;
@@ -677,8 +643,8 @@ Points*  curPE = curP;
 	if (cur->fig->type != LINE)
 	{
 		RectFunc^ curF = (RectFunc^)cur->fig;
-	int	curX  = curF->leftCoords.X + (curF->rightCoords.X - curF->leftCoords.X) / 2;
-	if (((abs(curPF->y - curF->rightCoords.Y) <= (closeObject+3 )) ||
+	int	curX  = curF->leftCoords.X + (curF->rightCoords.X - curF->leftCoords.X) / 2;  //для крепления к низу и верху 
+	if (((abs(curPF->y - curF->rightCoords.Y) <= (closeObject+3 )) ||  // поиск подходящей координаты фигуры 
 		(abs(curPF->y - curF->leftCoords.Y) <= (closeObject+3))) &&
 		(abs(curPF->x - curX) <= (closeObject+3 )) && (!fF)) 
 	{
@@ -690,9 +656,9 @@ Points*  curPE = curP;
 	else
 		curPF->y  = curF->leftCoords.Y;
 	curPF->x  = curX;
-	makeSmoothLine(curL, System::Drawing::Point(curPF->x,curPF->y), System::Drawing::Point(pP.x, pP.y));
+	makeSmoothLine(curL, System::Drawing::Point(curPF->x,curPF->y), System::Drawing::Point(pP.x, pP.y));  // выравнивание точек линии при прикреплении 
 	}
-	else if (((abs(curPE->y - curF->rightCoords.Y) <= (closeObject +3)) ||
+	else if (((abs(curPE->y - curF->rightCoords.Y) <= (closeObject +3)) ||   // поиск подходящей координаты фигуры 
 		(abs(curPE->y - curF->leftCoords.Y) <= (closeObject+3 ))) &&
 		(abs(curPE->x - curX) <= (closeObject+3 )) &&  (!fE))
 	{
@@ -708,8 +674,39 @@ Points*  curPE = curP;
 	}
 		if (fF && fE)
 			return;
+	
+	int	curY = curF->leftCoords.Y + (curF->rightCoords.Y - curF->leftCoords.Y) / 2; //для крепления к левой и правой стороне 
+	if (((abs(curPF->x - curF->rightCoords.X) <= (closeObject + 3)) ||
+		(abs(curPF->x - curF->leftCoords.X) <= (closeObject + 3))) &&    // поиск подходящей координаты фигуры 
+		(abs(curPF->y - curY) <= (closeObject + 3)) && (!fF))
+	{
+		fF = true;
+		pP.x = curPF->x;
+		pP.y = curPF->y;
+		if (abs(curPF->x - curF->rightCoords.X) <= (closeObject + 3))
+			curPF->x = curF->rightCoords.X;
+		else
+			curPF->x = curF->leftCoords.X;
+		curPF->y = curY;
+		makeSmoothLine(curL, System::Drawing::Point(curPF->x, curPF->y), System::Drawing::Point(pP.x, pP.y));
 	}
-
+	else if (((abs(curPE->x - curF->rightCoords.X) <= (closeObject + 3)) ||
+		(abs(curPE->x - curF->leftCoords.X) <= (closeObject + 3))) &&    // поиск подходящей координаты фигуры 
+		(abs(curPE->y - curY) <= (closeObject + 3)) && (!fE))
+	{  
+		fE = true;
+		pP.x = curPE->x;
+		pP.y = curPE->y;
+		if (abs(curPE->x - curF->leftCoords.X) <= (closeObject + 3))
+			curPE->x = curF->leftCoords.X;
+		else
+			curPE->x = curF->rightCoords.X;
+		curPE->y = curY;
+		makeSmoothLine(curL, System::Drawing::Point(curPE->x, curPE->y), System::Drawing::Point(pP.x, pP.y));
+	}
+	if (fF && fE)
+		return;
+	}
 
 	cur = cur->next;
 	}

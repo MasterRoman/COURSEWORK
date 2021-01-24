@@ -1,6 +1,8 @@
 #pragma once
 #include "RectFunc.h"
 
+// Классы для всех фигур
+
 ref class ProcessFunc : RectFunc
 {
 public:

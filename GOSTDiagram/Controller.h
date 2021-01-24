@@ -215,7 +215,7 @@ namespace GOSTDiagram {
 			});
 			this->menuStrip->Location = System::Drawing::Point(0, 0);
 			this->menuStrip->Name = L"menuStrip";
-			this->menuStrip->Size = System::Drawing::Size(1082, 28);
+			this->menuStrip->Size = System::Drawing::Size(1082, 30);
 			this->menuStrip->TabIndex = 0;
 			this->menuStrip->Tag = L"";
 			this->menuStrip->Text = L"menuStrip";
@@ -228,7 +228,7 @@ namespace GOSTDiagram {
 					this->FileExitMenuItem
 			});
 			this->FileStripMenuItem->Name = L"FileStripMenuItem";
-			this->FileStripMenuItem->Size = System::Drawing::Size(59, 24);
+			this->FileStripMenuItem->Size = System::Drawing::Size(59, 26);
 			this->FileStripMenuItem->Text = L"Файл";
 			// 
 			// FileNewMenuItem
@@ -291,7 +291,7 @@ namespace GOSTDiagram {
 					this->EditCopyMenuItem, this->EditInsertMenuItem
 			});
 			this->EditStripMenuItem->Name = L"EditStripMenuItem";
-			this->EditStripMenuItem->Size = System::Drawing::Size(137, 24);
+			this->EditStripMenuItem->Size = System::Drawing::Size(137, 26);
 			this->EditStripMenuItem->Text = L"Редактирование";
 			// 
 			// EditUndoMenuItem
@@ -353,10 +353,10 @@ namespace GOSTDiagram {
 					this->toolStripOpenButton, this->toolStripSaveButton, this->toolStripSaveAsButton, this->toolStripSeparator1, this->toolStripUndoButton,
 					this->toolStripCopyButton, this->toolStripPasteButton
 			});
-			this->toolStripMenu->Location = System::Drawing::Point(0, 28);
+			this->toolStripMenu->Location = System::Drawing::Point(0, 30);
 			this->toolStripMenu->Name = L"toolStripMenu";
 			this->toolStripMenu->Padding = System::Windows::Forms::Padding(4, 0, 4, 0);
-			this->toolStripMenu->Size = System::Drawing::Size(1082, 25);
+			this->toolStripMenu->Size = System::Drawing::Size(1082, 31);
 			this->toolStripMenu->TabIndex = 1;
 			this->toolStripMenu->Text = L"toolStripMenu";
 			// 
@@ -366,7 +366,7 @@ namespace GOSTDiagram {
 			this->toolStripNewButton->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"toolStripNewButton.Image")));
 			this->toolStripNewButton->ImageTransparentColor = System::Drawing::Color::Magenta;
 			this->toolStripNewButton->Name = L"toolStripNewButton";
-			this->toolStripNewButton->Size = System::Drawing::Size(29, 22);
+			this->toolStripNewButton->Size = System::Drawing::Size(29, 28);
 			this->toolStripNewButton->Click += gcnew System::EventHandler(this, &Controller::toolStripNewButton_Click);
 			// 
 			// toolStripOpenButton
@@ -375,7 +375,7 @@ namespace GOSTDiagram {
 			this->toolStripOpenButton->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"toolStripOpenButton.Image")));
 			this->toolStripOpenButton->ImageTransparentColor = System::Drawing::Color::Magenta;
 			this->toolStripOpenButton->Name = L"toolStripOpenButton";
-			this->toolStripOpenButton->Size = System::Drawing::Size(29, 22);
+			this->toolStripOpenButton->Size = System::Drawing::Size(29, 28);
 			this->toolStripOpenButton->Click += gcnew System::EventHandler(this, &Controller::toolStripOpenButton_Click);
 			// 
 			// toolStripSaveButton
@@ -384,7 +384,7 @@ namespace GOSTDiagram {
 			this->toolStripSaveButton->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"toolStripSaveButton.Image")));
 			this->toolStripSaveButton->ImageTransparentColor = System::Drawing::Color::Magenta;
 			this->toolStripSaveButton->Name = L"toolStripSaveButton";
-			this->toolStripSaveButton->Size = System::Drawing::Size(29, 22);
+			this->toolStripSaveButton->Size = System::Drawing::Size(29, 28);
 			this->toolStripSaveButton->Click += gcnew System::EventHandler(this, &Controller::toolStripSaveButton_Click);
 			// 
 			// toolStripSaveAsButton
@@ -393,13 +393,13 @@ namespace GOSTDiagram {
 			this->toolStripSaveAsButton->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"toolStripSaveAsButton.Image")));
 			this->toolStripSaveAsButton->ImageTransparentColor = System::Drawing::Color::Magenta;
 			this->toolStripSaveAsButton->Name = L"toolStripSaveAsButton";
-			this->toolStripSaveAsButton->Size = System::Drawing::Size(29, 22);
+			this->toolStripSaveAsButton->Size = System::Drawing::Size(29, 28);
 			this->toolStripSaveAsButton->Click += gcnew System::EventHandler(this, &Controller::toolStripSaveAsButton_Click);
 			// 
 			// toolStripSeparator1
 			// 
 			this->toolStripSeparator1->Name = L"toolStripSeparator1";
-			this->toolStripSeparator1->Size = System::Drawing::Size(6, 25);
+			this->toolStripSeparator1->Size = System::Drawing::Size(6, 31);
 			// 
 			// toolStripUndoButton
 			// 
@@ -407,7 +407,7 @@ namespace GOSTDiagram {
 			this->toolStripUndoButton->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"toolStripUndoButton.Image")));
 			this->toolStripUndoButton->ImageTransparentColor = System::Drawing::Color::Magenta;
 			this->toolStripUndoButton->Name = L"toolStripUndoButton";
-			this->toolStripUndoButton->Size = System::Drawing::Size(29, 22);
+			this->toolStripUndoButton->Size = System::Drawing::Size(29, 28);
 			this->toolStripUndoButton->Click += gcnew System::EventHandler(this, &Controller::toolStripUndoButton_Click);
 			// 
 			// toolStripCopyButton
@@ -416,7 +416,7 @@ namespace GOSTDiagram {
 			this->toolStripCopyButton->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"toolStripCopyButton.Image")));
 			this->toolStripCopyButton->ImageTransparentColor = System::Drawing::Color::Magenta;
 			this->toolStripCopyButton->Name = L"toolStripCopyButton";
-			this->toolStripCopyButton->Size = System::Drawing::Size(29, 22);
+			this->toolStripCopyButton->Size = System::Drawing::Size(29, 28);
 			this->toolStripCopyButton->Click += gcnew System::EventHandler(this, &Controller::toolStripCopyButton_Click);
 			// 
 			// toolStripPasteButton
@@ -425,7 +425,7 @@ namespace GOSTDiagram {
 			this->toolStripPasteButton->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"toolStripPasteButton.Image")));
 			this->toolStripPasteButton->ImageTransparentColor = System::Drawing::Color::Magenta;
 			this->toolStripPasteButton->Name = L"toolStripPasteButton";
-			this->toolStripPasteButton->Size = System::Drawing::Size(29, 22);
+			this->toolStripPasteButton->Size = System::Drawing::Size(29, 28);
 			this->toolStripPasteButton->Click += gcnew System::EventHandler(this, &Controller::toolStripPasteButton_Click);
 			// 
 			// toolStripFunctions
@@ -439,10 +439,10 @@ namespace GOSTDiagram {
 					this->toolStripDataButton, this->toolStripTerminatorButton, this->toolStripPageReferenceButton, this->toolStripSeparator4, this->toolStripTextButton,
 					this->toolStripSeparator5
 			});
-			this->toolStripFunctions->Location = System::Drawing::Point(0, 53);
+			this->toolStripFunctions->Location = System::Drawing::Point(0, 61);
 			this->toolStripFunctions->Name = L"toolStripFunctions";
 			this->toolStripFunctions->Padding = System::Windows::Forms::Padding(0, 1, 0, 1);
-			this->toolStripFunctions->Size = System::Drawing::Size(29, 500);
+			this->toolStripFunctions->Size = System::Drawing::Size(29, 492);
 			this->toolStripFunctions->TabIndex = 2;
 			this->toolStripFunctions->Text = L"toolStrip";
 			this->toolStripFunctions->ItemClicked += gcnew System::Windows::Forms::ToolStripItemClickedEventHandler(this, &Controller::toolStripFunctions_ItemClicked);
@@ -556,9 +556,9 @@ namespace GOSTDiagram {
 			this->panel->AutoScroll = true;
 			this->panel->Controls->Add(this->pictureBox);
 			this->panel->Dock = System::Windows::Forms::DockStyle::Fill;
-			this->panel->Location = System::Drawing::Point(29, 53);
+			this->panel->Location = System::Drawing::Point(29, 61);
 			this->panel->Name = L"panel";
-			this->panel->Size = System::Drawing::Size(1053, 500);
+			this->panel->Size = System::Drawing::Size(1053, 492);
 			this->panel->TabIndex = 3;
 			// 
 			// pictureBox
@@ -598,7 +598,7 @@ namespace GOSTDiagram {
 			this->Controls->Add(this->menuStrip);
 			this->MainMenuStrip = this->menuStrip;
 			this->Name = L"Controller";
-			this->Text = L"Controller";
+			this->Text = L"Algorithm diagram editor";
 			this->Load += gcnew System::EventHandler(this, &Controller::Controller_Load);
 			this->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &Controller::Controller_KeyDown);
 			this->menuStrip->ResumeLayout(false);
@@ -616,7 +616,7 @@ namespace GOSTDiagram {
 		}
 #pragma endregion
 
-void saveBMP(System::String^ path) {
+void saveBMP(System::String^ path) {  // сохранение в формает bmp 
 	saveToBMP = true;
 	curSelectedFunc = nullptr;
 
@@ -624,38 +624,38 @@ void saveBMP(System::String^ path) {
 	
 	
 
-	Bitmap^ bmp = gcnew Bitmap(pictureBox->Width, pictureBox->Height);
+	Bitmap^ bmp = gcnew Bitmap(pictureBox->Width, pictureBox->Height);   // создание bmp-а 
 	pictureBox->DrawToBitmap(bmp, pictureBox->ClientRectangle);
-	bmp->Save(path, System::Drawing::Imaging::ImageFormat::Bmp);
+	bmp->Save(path, System::Drawing::Imaging::ImageFormat::Bmp);  // сохранение bmp-а
 	
 	delete bmp;
 
 	saveToBMP = false;
 }
 
-System::String^ openNFile() {
+System::String^ openNFile() {  // получение пути для открытия файла 
 	openFileDialog->ShowDialog();
 	return openFileDialog->FileName;
 }
 
-System::String^ saveNFile() {
+System::String^ saveNFile() {   // получение пути для сохранения нового файла 
 	saveFileDialog->ShowDialog();
 	return saveFileDialog->FileName;
 
 }
 
-bool saveNewFile() {
+bool saveNewFile() {  // сохранение нового файла
 	System::String^ path = saveNFile();
 	int pos = path->IndexOf(".");
 	System::String^ ext = path->Substring(pos + 1);
 		if ((path->Length != 0) && (ext!="bmp")){
 
 			curPath = path;
-			saveToFile(head, curPath);
+			saveToFile(head, curPath);    // сохранение файла в спец. формате 
 			return true;
 		}
 		else if (path->Length != 0) {
-			saveBMP(path);
+			saveBMP(path);   // сохранение файла в bmp
 			curPath = path;
 			return true;
 	}
@@ -664,7 +664,7 @@ bool saveNewFile() {
 }
 
 
-void actNew() {
+void actNew() {  // создание нового файла 
 	System::Windows::Forms::DialogResult res = MessageBox::Show("Все несохраненные данные будут удалены.Продолжить?", "Создание нового файла", MessageBoxButtons::YesNo, MessageBoxIcon::Warning);
 	if (res == System::Windows::Forms::DialogResult::Yes) {
 		isChanged = false;
@@ -677,8 +677,8 @@ void actNew() {
 	
 }
 
-void actOpen() {
-	if (isChanged) {
+void actOpen() {		// открытие файла 
+	if (isChanged) {  // если файла изменен - предупреждение 
 		System::Windows::Forms::DialogResult res = MessageBox::Show("Желаете сохранить файл?В противном случае все данные будут утеряны?", "Сохранение", MessageBoxButtons::YesNoCancel, MessageBoxIcon::Warning);
 		if (res == System::Windows::Forms::DialogResult::Yes) {
 			if (!saveNewFile())
@@ -697,23 +697,21 @@ void actOpen() {
 		cleanList(head);
 		cleanStack(stackHead);
 		curPath = str;
-		if (readFromFile(head, curPath)) {
+		if (readFromFile(head, curPath)) {  // открытие файла из спец формата 
 			isChanged = false;
 			
 		}
-		//else
-		//	actNew();
 		
 		pictureBox->Invalidate();
 	} 
 
 }
 
-void actSaveAs() {
+void actSaveAs() { // сохранить как
 	saveNewFile();
 }
-
-void actSave() {
+ 
+void actSave() {  // сохранить сохранить
 	int pos = curPath->IndexOf(".");
 	System::String^ ext = curPath->Substring(pos + 1);
 	if ((curPath->Length != 0) && (ext!="bmp")) {
@@ -733,7 +731,7 @@ void actSave() {
 
 // additional methods
 
-void changeButtonState(FunctionType type) {
+void changeButtonState(FunctionType type) {  //состояние кнопки от нажатия 
 			switch (type)
 			{
 			case POINTER: {
@@ -773,13 +771,13 @@ void changeButtonState(FunctionType type) {
 
 }
 
-void stopDrawLine() {
+void stopDrawLine() {   //закончить рисование 
 	curDrawMode = NOT_DRAW;
 	pictureBox->Invalidate();
 
 }
 
-void changeCursor(EditMode mode) {
+void changeCursor(EditMode mode) {   //смена курсора в зависимости от режима редактирования 
 	switch (mode)
 	{
 
@@ -835,18 +833,13 @@ void changeCursor(EditMode mode) {
 		pictureBox->Cursor = System::Windows::Forms::Cursors::SizeNWSE;
 		break;
 	}
-	case RESIZE_LINE:
-	{
-		
-		pictureBox->Cursor = System::Windows::Forms::Cursors::Hand;
-		break;
-	}
+	
 	}
 
 }
 
 
-private: System::Void Controller_Load(System::Object^ sender, System::EventArgs^ e) {
+private: System::Void Controller_Load(System::Object^ sender, System::EventArgs^ e) { //начальная загрузка и конфигурация 
 	curType = POINTER;
 	toolStripPointerButton->Checked = true;
 	isChanged = false;
@@ -862,42 +855,42 @@ private: System::Void Controller_Load(System::Object^ sender, System::EventArgs^
 	
 }
 private: System::Void pictureBox_Paint(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
-	cleanScreen(e, pictureBox->Width, pictureBox->Height);
-	if (!saveToBMP)
+	cleanScreen(e, pictureBox->Width, pictureBox->Height); // очищаем экран 
+	if (!saveToBMP)  // если не сохраненив в bmp ,то выводим с вершинами  
 		drawFunctions(e, head, true);
 	else
 		drawFunctions(e, head, false);
 
-	if ((curDrawMode == DRAW_LINE) && (curType == LINE)) {
+	if ((curDrawMode == DRAW_LINE) && (curType == LINE)) {   //рисуем путь для линии 
 		drawPath(e,(LineFunc^)curElement->fig, Point(curX, curY));
 	}
 
-	if ((curType == POINTER) && (curEditMode == NOT_EDIT) && (selectedRect.top != -1)) {
+	if ((curType == POINTER) && (curEditMode == NOT_EDIT) && (selectedRect.top != -1)) {  // рисуем область выделения
 		drawSelectedRect(e, selectedRect);
 	}
 	
-	if ((curSelectedFunc != nullptr) || (selectedHead->next != nullptr)) {
+	if ((curSelectedFunc != nullptr) || (selectedHead->next != nullptr)) {  
 		if (selectedHead->next != nullptr) {
 			List^ cur = selectedHead->next;
 			while (cur!=nullptr)
 			{
-				repaintSelectedFunc(e, cur);
+				repaintSelectedFunc(e, cur,false);  //выделение вершин элемента 
 				cur = cur->next;
 
 			}
 		}
 		else if (curSelectedFunc != nullptr)
-		repaintSelectedFunc(e, curSelectedFunc);
+		repaintSelectedFunc(e, curSelectedFunc,false);
 	}
 
-
-
-	
+	if ((curSelectedFunc != nullptr) && (curWriteType == WRITE)) {
+		repaintSelectedFunc(e, curSelectedFunc,true);  //выделение для режима записи в фигуру
+	}
 
 }
 
 private: System::Void toolStripFunctions_ItemClicked(System::Object^ sender, System::Windows::Forms::ToolStripItemClickedEventArgs^ e) {
-	if (curType == LINE) {
+	if (curType == LINE) {				// опрежеление текущего режима фигуры и отображения выделением кнопки
 		stopDrawLine();
 	}
 	if (e->ClickedItem->Tag->ToString()!="notFigure")
@@ -930,6 +923,7 @@ private: System::Void toolStripFunctions_ItemClicked(System::Object^ sender, Sys
 		return;
 }
 
+		//действия с главным меню
 
 private: System::Void FileNewMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
 	actNew();
@@ -955,7 +949,7 @@ private: System::Void FileSaveAsMenuItem_Click(System::Object^ sender, System::E
 private: System::Void toolStripSaveAsButton_Click(System::Object^ sender, System::EventArgs^ e) {
 	actSaveAs();
 }
-private: System::Void FileExitMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+private: System::Void FileExitMenuItem_Click(System::Object^ sender, System::EventArgs^ e) { // выход из программы
 	if (isChanged) {
 		System::Windows::Forms::DialogResult res = MessageBox::Show("Желаете сохранить файл?В противном случае все данные будут утеряны?", "Сохранение", MessageBoxButtons::YesNoCancel, MessageBoxIcon::Warning);
 		if (res == System::Windows::Forms::DialogResult::Yes) {
@@ -978,14 +972,14 @@ private: System::Void FileExitMenuItem_Click(System::Object^ sender, System::Eve
 private: System::Void pictureBox_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
 
 	if (curType != POINTER) {
-		cleanList(selectedHead);
+		cleanList(selectedHead);  //очистка листа выделенных фигур
 		curSelectedFunc = nullptr;
 
 	}
 
 	if ((curType == POINTER) && (curEditMode == NOT_EDIT)) {
 		cleanList(selectedHead);
-		selectedRect.left  = e->X;
+		selectedRect.left  = e->X;   //определения начальных координат выделения
 		selectedRect.right  = e->X;
 		selectedRect.top = e->Y;
 		selectedRect.bottom = e->Y;
@@ -994,14 +988,14 @@ private: System::Void pictureBox_MouseDown(System::Object^ sender, System::Windo
 	if (curDrawMode == DRAW_LINE) {
 		isChanged = true;
 
-		if (e->Button == System::Windows::Forms::MouseButtons::Left)
+		if (e->Button == System::Windows::Forms::MouseButtons::Left)  //добавление точки к линии 
 		{
 		    addPoints((LineFunc^)curElement->fig, Point(e->X, e->Y));
 
 			pushStack(stackHead, curElement, POINT_ADD_UNDO,nullptr);
 			return;
 		} 
-		else if (e->Button == System::Windows::Forms::MouseButtons::Right) {
+		else if (e->Button == System::Windows::Forms::MouseButtons::Right) {  //останока рисования линии
 			stopDrawLine();
 			return;
 		}
@@ -1014,25 +1008,25 @@ private: System::Void pictureBox_MouseDown(System::Object^ sender, System::Windo
 		isChanged = true;
 		if (curType != LINE) {
 			
-			curElement = push(head, curType,Point(e->X,e->Y));
+			curElement = push(head, curType,Point(e->X,e->Y));   // добавление фигуры 
 			pushStack(stackHead, curElement, FIGURE_INSERT_UNDO, nullptr);
 		}
 		else if (curDrawMode != DRAW_LINE)
 		{
-			curElement = addLine(head, Point(e->X, e->Y));
+			curElement = addLine(head, Point(e->X, e->Y));     // добавление линии
 			pushStack(stackHead, curElement, FIGURE_INSERT_UNDO, nullptr);
 			curDrawMode = DRAW_LINE;
 		}
 	}
 	else
 	{
-		startX = e->X;
+		startX = e->X;  
 		startY = e->Y;
 	}
 
 	if (curType == POINTER) {
 	
-		curSelectedFunc = hitTest(head, Point(e->X, e->Y));
+		curSelectedFunc = hitTest(head, Point(e->X, e->Y));  // определение выделенмя фигур
 		if (!(isElementInList(selectedHead,curSelectedFunc))) {
 			cleanList(selectedHead);
 		}
@@ -1047,7 +1041,7 @@ private: System::Void pictureBox_MouseMove(System::Object^ sender, System::Windo
 	if ((curType == POINTER) && (curEditMode == NOT_EDIT) && (selectedRect.top!=-1)) {
 
 		selectedRect.right = e->X;
-		selectedRect.bottom = e->Y;
+		selectedRect.bottom = e->Y;  // перемещение области выделения 
 		pictureBox->Invalidate();
 		return;
 	}
@@ -1055,13 +1049,7 @@ private: System::Void pictureBox_MouseMove(System::Object^ sender, System::Windo
 
 	if ((curType == POINTER) && (curDrawMode == NOT_DRAW)) {
 		curEditMode = getCurEditMode(head, curSelectedFunc, Point(e->X, e->Y));
-		changeCursor(curEditMode);
-
-
-		if ((curSelectedFunc != nullptr) || (selectedHead->next != nullptr)) {
-			// if we have selected func we will show it
-			//pictureBox->Invalidate();
-		}
+		changeCursor(curEditMode);   // определение режима редактирования и изменение курсора 
 
 	}
 
@@ -1070,11 +1058,12 @@ private: System::Void pictureBox_MouseMove(System::Object^ sender, System::Windo
 		if ((curType == POINTER) && (!isMove)) {
 			isMove = true;
 			if ((cur == nullptr) && (curSelectedFunc != nullptr)) {
-
+				// подготовка данных для стека отмены 
 				if (curSelectedFunc->fig->type != LINE) {
 					RectFunc^ curF = (RectFunc^)curSelectedFunc->fig;
 					String^ str = pointsToStr(curF->leftCoords);
 					str += pointsToStr(curF->rightCoords);
+					// внесение в стек фигуры  
 					pushStack(stackHead, curSelectedFunc, FUNC_MOVE_UNDO, str);
 
 				}
@@ -1088,18 +1077,19 @@ private: System::Void pictureBox_MouseMove(System::Object^ sender, System::Windo
 						res += pointsToStr(System::Drawing::Point(points->x, points->y));
 						points = points->next;
 					}
-
+					// внесение в стек линии  
 					pushStack(stackHead, curSelectedFunc, LINE_MOVE_UNDO, res);
 				}
 			}
 			while (cur != nullptr)
 			{
-
+				// подготовка данных для стека отмены 
 				if (cur->fig->type != LINE)
 				{
 					RectFunc^ curF = (RectFunc^)cur->fig;
 					String^ str = pointsToStr(curF->leftCoords);
 					str += pointsToStr(curF->rightCoords);
+					// внесение в стек фигуры  
 					pushStack(stackHead, cur, FUNC_MOVE_UNDO, str);
 				}
 				else
@@ -1112,7 +1102,7 @@ private: System::Void pictureBox_MouseMove(System::Object^ sender, System::Windo
 						res += pointsToStr(System::Drawing::Point(points->x, points->y));
 						points = points->next;
 					}
-
+					// внесение в стек линии 
 					pushStack(stackHead, cur, LINE_MOVE_UNDO, res);
 				}
 
@@ -1121,7 +1111,7 @@ private: System::Void pictureBox_MouseMove(System::Object^ sender, System::Windo
 
 		}
 	
-		
+		// трансформирование элементов
 	    cur = selectedHead->next;
 		if ((curSelectedFunc != nullptr) && (cur==nullptr))
 			transformFunc(curSelectedFunc, Point(e->X, e->Y), Point(startX, startY), curEditMode);
@@ -1144,7 +1134,7 @@ private: System::Void pictureBox_MouseMove(System::Object^ sender, System::Windo
 	if ((curDrawMode == DRAW_LINE) && (curType == LINE)) {
 		pictureBox->Invalidate();
 		curX = e->X;
-		curY = e->Y;
+		curY = e->Y;  // координаты для прокладывания пути линии 
 	}
 
 
@@ -1153,7 +1143,7 @@ private: System::Void pictureBox_MouseMove(System::Object^ sender, System::Windo
 private: System::Void pictureBox_MouseUp(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
 	if ((curType == POINTER) && (curEditMode == NOT_EDIT)) {
 		cleanList(selectedHead);
-		getSelectedFuncFromRect(head, selectedHead, selectedRect);
+		getSelectedFuncFromRect(head, selectedHead, selectedRect);  //поиск элементов для выделения в области
 		selectedRect.top = -1;
 	}
 	if (curDrawMode != DRAW_LINE) {
@@ -1164,11 +1154,13 @@ private: System::Void pictureBox_MouseUp(System::Object^ sender, System::Windows
 		isMove = false;
 	}
 
+	// постановка фигур на одну вертикальную линию
 	if ((curSelectedFunc != nullptr) && (curSelectedFunc->fig->type != LINE))
-		makeFuncOnOneLine(head, curSelectedFunc);
+		makeFuncOnOneLine(head, curSelectedFunc);  
 	else if ((curElement != nullptr) && (curElement->fig->type != LINE))
 		makeFuncOnOneLine(head, curElement);
-
+	 
+	// примагничивание в фигуре линии 
 	if ((curSelectedFunc != nullptr) && (curSelectedFunc->fig->type == LINE))
 		makePointOnCenter(head, curSelectedFunc);
 	else if ((curElement != nullptr) && (curElement->fig->type == LINE))
@@ -1181,16 +1173,17 @@ private: System::Void pictureBox_MouseUp(System::Object^ sender, System::Windows
 
 
 private: System::Void Controller_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e) {
+	// обработка нажатия 
 	if (curWriteType != WRITE) {
 		if (curSelectedFunc != nullptr) {
 			pushExistingFunc(selectedHead, curSelectedFunc->fig);
 		}
-		if (e->KeyCode == System::Windows::Forms::Keys::Delete) {
+		if (e->KeyCode == System::Windows::Forms::Keys::Delete) {  // определение кнопки 
 			List^ cur = selectedHead->next;
 			while (cur != nullptr)
 			{
 				pushStack(stackHead, cur, DELETE_UNDO, nullptr);
-				deleteElement(head, cur);
+				deleteElement(head, cur);  // удаление фигуры 
 				cur = cur->next;
 
 			}
@@ -1202,8 +1195,11 @@ private: System::Void Controller_KeyDown(System::Object^ sender, System::Windows
 	}
 	else
 	{
+		// редактирование текста в фигуре 
+		// в зависимости от кода клавиши выбирается действие 
 		if ((curSelectedFunc != nullptr) && (curSelectedFunc->fig->type != LINE)) {
 			RectFunc^ curF = (RectFunc^)curSelectedFunc->fig;
+			//8 delete | 13 enter | 32 space | 37 left | 39 right | 40 down | 38 up  | 107 + | 109 - |106 * |111 /
 			if (e->KeyValue == 13) {
 				curF->text += "\n";
 			} else if (e->KeyValue == 8){
@@ -1213,22 +1209,36 @@ private: System::Void Controller_KeyDown(System::Object^ sender, System::Windows
 			else if(e->KeyValue == 32) {
 				curF->text += " ";
 			}
+			else  if (e->KeyValue == 107) {
+				curF->text += "+";
+			}
+			else if(e->KeyValue == 109) {
+				curF->text += "-";
+			}
+			else if (e->KeyValue == 106) {
+				curF->text += "*";
+			}
+			else if (e->KeyValue == 111) {
+				curF->text += "/";
+			}
 			else
-			curF->text += ((Char)e->KeyValue).ToString();
-			//8 delete | 13 enter | 32 space | 37 left | 39 right | 40 down | 38 up  
+				if (e->KeyValue>=65 && e->KeyValue <= 90)
+			curF->text += ((Char)(e->KeyValue + ('a'-'A'))).ToString();
+				else 
+				 curF->text += (Char(e->KeyValue)).ToString();
 			pictureBox->Invalidate();
 		}
 	}
 }
 private: System::Void pictureBox_DoubleClick(System::Object^ sender, System::EventArgs^ e) {
-	curWriteType = WRITE;
+	curWriteType = WRITE;  // переход в режим редактирования текста 
 	isMove = false;
 	cleanList(selectedHead);
 }
 
 
 void actCopy() {
-	
+	// копирования фигуры в список 
 	cleanList(copyHead);
 	List^ cur = selectedHead->next;
 	while (cur != nullptr) {
@@ -1241,13 +1251,14 @@ void actCopy() {
 int copyShift = 25;
 
 void actPaste() {
-
+	// вставка фигуры 
 	if (copyHead->next == nullptr) {
 		return;
 	}
 	List^ curCopy = copyHead->next;
 	cleanList(selectedHead);
 	while (curCopy != nullptr) {
+		// создание копии линии и смены её координат для удобства нахождения 
 		if (curCopy->fig->type == LINE) {
 			LineFunc^ absL = gcnew LineFunc();
 			LineFunc^ copyL = (LineFunc^)curCopy->fig;
@@ -1264,6 +1275,7 @@ void actPaste() {
 			pushStack(stackHead, curL, FIGURE_INSERT_UNDO, nullptr);
 		}
 		else {
+			// создание копии фигуры и смены её координат для удобства нахождения
 			AbstractFigure^ absF = figureFromType(curCopy->fig->type, System::Drawing::Point(0, 0));
 			RectFunc^ rectF = (RectFunc^)absF;
 			RectFunc^ copyF = (RectFunc^)curCopy->fig;
@@ -1282,7 +1294,7 @@ void actPaste() {
 	pictureBox->Invalidate();
 }
 
-
+		// функции редактирования 
 
 private: System::Void toolStripCopyButton_Click(System::Object^ sender, System::EventArgs^ e) {
 	EditCopyMenuItem_Click(sender,e);
@@ -1299,9 +1311,9 @@ private: System::Void EditInsertMenuItem_Click(System::Object^ sender, System::E
 }
 
 void actUndo(){
-
+	// отмена действия 
 	UndoStack^ cur = popStack(stackHead);
-	undoStackAction(cur, head);
+	undoStackAction(cur, head);  // после доставания из стека выполняем отмену 
 	if (cur != nullptr && cur->figure->fig->type == LINE) {
 		LineFunc^ line = (LineFunc^)cur->figure->fig;
 		if (line->headLine->next == nullptr) {

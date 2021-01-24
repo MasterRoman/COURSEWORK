@@ -2,20 +2,20 @@
 #include "LineFunc.h"
 #include "RectFunc.h"
 
-UndoStack^ stackInit(UndoStack^ head) {
+UndoStack^ stackInit(UndoStack^ head) {  // создание стека 
 	head = gcnew UndoStack;
 	head->str = nullptr;
 	head->next = nullptr;
 
 	return head;
 }
-bool stackIsEmpty(UndoStack^ head) {
+bool stackIsEmpty(UndoStack^ head) {  // проверка стека на пустоту  
 	if (head->next == nullptr)
 		return true;
 	return false;
 }
 
-void pushStack(UndoStack^ head, List^ figure, UndoTypes type,System::String^ str) {
+void pushStack(UndoStack^ head, List^ figure, UndoTypes type,System::String^ str) {  // добавление в стек 
 	UndoStack^ newEl = gcnew UndoStack;
 	newEl->figure = figure;
 	newEl->type = type;
@@ -29,7 +29,7 @@ void pushStack(UndoStack^ head, List^ figure, UndoTypes type,System::String^ str
 	head->next = newEl;
 }
 
-UndoStack^ popStack(UndoStack^ head) {
+UndoStack^ popStack(UndoStack^ head) {  // изъятие из стека 
 	if (!stackIsEmpty(head)) {
 		UndoStack^ cur = head->next;
 		head->next = head->next->next;
@@ -41,7 +41,7 @@ UndoStack^ popStack(UndoStack^ head) {
 
 }
 
-void cleanStack(UndoStack^ head) {
+void cleanStack(UndoStack^ head) {  // очистка стека 
 	UndoStack^ cur = head->next;
 	while (cur != nullptr) {
 		UndoStack^ temp = cur;
@@ -51,10 +51,10 @@ void cleanStack(UndoStack^ head) {
 	}
 }
 
-void undoStackAction(UndoStack^ cur, List^ listHead){
+void undoStackAction(UndoStack^ cur, List^ listHead){  // действия отмены  
 	if (cur != nullptr) {
 		switch (cur->type){
-		
+			// перебор различных вариантов и реагирование на них
 		case FUNC_MOVE_UNDO: {
 			RectFunc^ curF = (RectFunc^)cur->figure->fig;
 			System::String^ str = cur->str;

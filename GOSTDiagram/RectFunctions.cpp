@@ -10,6 +10,7 @@ ProcessFunc::ProcessFunc() {
 
 ProcessFunc::ProcessFunc(System::Drawing::Point points)
 {
+	// конструктор с начальными настройками 
 	this->leftCoords.X = points.X - 44;
 	this->leftCoords.Y = points.Y - 24;
 	this->rightCoords.X = points.X + 44;
@@ -23,6 +24,8 @@ ProcessFunc::~ProcessFunc()
 }
 
 void ProcessFunc::drawFigure(System::Windows::Forms::PaintEventArgs^ e,bool isVertex) {
+
+	// рисование фигуры и углов при надобности
 	System::Drawing::Pen^ pen = gcnew System::Drawing::Pen(System::Drawing::Color::Black);
 	pen->Width = 2.0f;
 
@@ -49,7 +52,7 @@ DecissionFunc::DecissionFunc()
 
 DecissionFunc::DecissionFunc(System::Drawing::Point points)
 {
-	//
+	// конструктор с начальными настройками 
 	this->leftCoords.X = points.X - 44;
 	this->leftCoords.Y = points.Y - 24;
 	this->rightCoords.X = points.X + 44;
@@ -63,7 +66,7 @@ DecissionFunc::~DecissionFunc()
 }
 
 void DecissionFunc::drawFigure(System::Windows::Forms::PaintEventArgs^ e, bool isVertex) {
-
+	// рисование фигуры и углов при надобности
 	System::Drawing::Pen^ pen = gcnew System::Drawing::Pen(System::Drawing::Color::Black);
 	pen->Width = 2.0f;
 	array<System::Drawing::Point>^ poligonPoints = gcnew array<System::Drawing::Point>{
@@ -94,7 +97,7 @@ TerminatorFunc::TerminatorFunc()
 
 TerminatorFunc::TerminatorFunc(System::Drawing::Point points)
 {
-	//
+	// конструктор с начальными настройками 
 	this->leftCoords.X = points.X - 44;
 	this->leftCoords.Y = points.Y - 16;
 	this->rightCoords.X = points.X + 44;
@@ -108,6 +111,7 @@ TerminatorFunc::~TerminatorFunc()
 }
 
 void TerminatorFunc::drawFigure(System::Windows::Forms::PaintEventArgs^ e, bool isVertex) {
+	// рисование фигуры и углов при надобности
 	System::Drawing::Pen^ pen = gcnew System::Drawing::Pen(System::Drawing::Color::Black);
 	pen->Width = 2.0f;
 
@@ -144,7 +148,7 @@ DataFunc::DataFunc()
 
 DataFunc::DataFunc(System::Drawing::Point points)
 {
-	//
+	// конструктор с начальными настройками 
 	this->leftCoords.X = points.X - 29;
 	this->leftCoords.Y = points.Y - 24;
 	this->rightCoords.X = points.X + 59;
@@ -157,6 +161,7 @@ DataFunc::~DataFunc()
 }
 
 void DataFunc::drawFigure(System::Windows::Forms::PaintEventArgs^ e, bool isVertex) {
+	// рисование фигуры и углов при надобности
 	System::Drawing::Pen^ pen = gcnew System::Drawing::Pen(System::Drawing::Color::Black);
 	pen->Width = 2.0f;
 	array<System::Drawing::Point>^ poligonPoints = gcnew array<System::Drawing::Point>{
@@ -190,7 +195,7 @@ PageRefFunc::PageRefFunc()
 
 PageRefFunc::PageRefFunc(System::Drawing::Point points)
 {
-	//
+	// конструктор с начальными настройками 
 	this->leftCoords.X = points.X - 16;
 	this->leftCoords.Y = points.Y - 16;
 	this->rightCoords.X = points.X + 16;
@@ -203,6 +208,7 @@ PageRefFunc::~PageRefFunc()
 }
 
 void PageRefFunc::drawFigure(System::Windows::Forms::PaintEventArgs^ e, bool isVertex) {
+	// рисование фигуры и углов при надобности
 	System::Drawing::Pen^ pen = gcnew System::Drawing::Pen(System::Drawing::Color::Black);
 	pen->Width = 2.0f;
 	e->Graphics->DrawEllipse(pen, this->leftCoords.X, this->leftCoords.Y, (this->rightCoords.X - this->leftCoords.X), 
@@ -230,6 +236,7 @@ TextFunc::TextFunc() {
 
 TextFunc::TextFunc(System::Drawing::Point points)
 {
+	// конструктор с начальными настройками 
 	this->leftCoords.X = points.X - 44;
 	this->leftCoords.Y = points.Y - 24;
 	this->rightCoords.X = points.X + 44;
@@ -243,6 +250,7 @@ TextFunc::~TextFunc()
 }
 
 void TextFunc::drawFigure(System::Windows::Forms::PaintEventArgs^ e, bool isVertex) {
+	// рисование фигуры и углов при надобности
 	System::Drawing::Pen^ pen = gcnew System::Drawing::Pen(System::Drawing::Color::Black);
 	pen->Width = 2.0f;
 

@@ -4,13 +4,13 @@
 #include "LineFunc.h"
 
 
-ref struct List
+ref struct List  // структура списка 
 {
 	AbstractFigure^ fig;
 	List^ next;
 };
 
-
+// основные функции для работы со списком и бизнесс логикой  
 
 List^ initList(List^);
 void cleanList(List^);

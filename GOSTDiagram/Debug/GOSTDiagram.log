@@ -1,10 +1,10 @@
 ﻿  Controller.cpp
-D:\COURSEWORK\GOSTDiagram\AbstractFigure.h(5,11): warning C4570: AbstractFigure: не был объявлен явно как абстрактный, однако содержит абстрактные функции
-D:\COURSEWORK\GOSTDiagram\AbstractFigure.h(5,11): message : void AbstractFigure::drawFigure(System::Windows::Forms::PaintEventArgs ^,bool): абстрактный
-D:\COURSEWORK\GOSTDiagram\AbstractFigure.h(8): message : см. объявление "AbstractFigure::drawFigure"
-D:\COURSEWORK\GOSTDiagram\RectFunc.h(3,11): warning C4570: RectFunc: не был объявлен явно как абстрактный, однако содержит абстрактные функции
-D:\COURSEWORK\GOSTDiagram\RectFunc.h(3,11): message : void RectFunc::drawFigure(System::Windows::Forms::PaintEventArgs ^,bool): абстрактный
-D:\COURSEWORK\GOSTDiagram\RectFunc.h(12): message : см. объявление "RectFunc::drawFigure"
+D:\COURSEWORK\GOSTDiagram\AbstractFigure.h(7,11): warning C4570: AbstractFigure: не был объявлен явно как абстрактный, однако содержит абстрактные функции
+D:\COURSEWORK\GOSTDiagram\AbstractFigure.h(7,11): message : void AbstractFigure::drawFigure(System::Windows::Forms::PaintEventArgs ^,bool): абстрактный
+D:\COURSEWORK\GOSTDiagram\AbstractFigure.h(10): message : см. объявление "AbstractFigure::drawFigure"
+D:\COURSEWORK\GOSTDiagram\RectFunc.h(6,11): warning C4570: RectFunc: не был объявлен явно как абстрактный, однако содержит абстрактные функции
+D:\COURSEWORK\GOSTDiagram\RectFunc.h(6,11): message : void RectFunc::drawFigure(System::Windows::Forms::PaintEventArgs ^,bool): абстрактный
+D:\COURSEWORK\GOSTDiagram\RectFunc.h(15): message : см. объявление "RectFunc::drawFigure"
 D:\COURSEWORK\GOSTDiagram\Controller.h(43,13): warning C4677: head: сигнатура члена, не являющегося частным, содержит частный тип сборки "List"
 D:\COURSEWORK\GOSTDiagram\FigureModel.h(7): message : см. объявление "List"
 D:\COURSEWORK\GOSTDiagram\Controller.h(44,19): warning C4677: curElement: сигнатура члена, не являющегося частным, содержит частный тип сборки "List"
@@ -18,5 +18,54 @@ D:\COURSEWORK\GOSTDiagram\FigureModel.h(7): message : см. объявление
 D:\COURSEWORK\GOSTDiagram\Controller.h(48,23): warning C4677: stackHead: сигнатура члена, не являющегося частным, содержит частный тип сборки "UndoStack"
 D:\COURSEWORK\GOSTDiagram\UndoStack.h(14): message : см. объявление "UndoStack"
 D:\COURSEWORK\GOSTDiagram\Controller.cpp(6,32): warning C4829: Возможно, неправильные параметры функции main. Рекомендуемый вариант - "int main(Platform::Array<Platform::String^>^ argv)"
+  FigureModel.cpp
+D:\COURSEWORK\GOSTDiagram\AbstractFigure.h(7,11): warning C4570: AbstractFigure: не был объявлен явно как абстрактный, однако содержит абстрактные функции
+D:\COURSEWORK\GOSTDiagram\AbstractFigure.h(7,11): message : void AbstractFigure::drawFigure(System::Windows::Forms::PaintEventArgs ^,bool): абстрактный
+D:\COURSEWORK\GOSTDiagram\AbstractFigure.h(10): message : см. объявление "AbstractFigure::drawFigure"
+D:\COURSEWORK\GOSTDiagram\RectFunc.h(6,11): warning C4570: RectFunc: не был объявлен явно как абстрактный, однако содержит абстрактные функции
+D:\COURSEWORK\GOSTDiagram\RectFunc.h(6,11): message : void RectFunc::drawFigure(System::Windows::Forms::PaintEventArgs ^,bool): абстрактный
+D:\COURSEWORK\GOSTDiagram\RectFunc.h(15): message : см. объявление "RectFunc::drawFigure"
+D:\COURSEWORK\GOSTDiagram\FigureModel.cpp(134,16): warning C4244: =: преобразование "float" в "int", возможна потеря данных
+  LineFunc.cpp
+D:\COURSEWORK\GOSTDiagram\AbstractFigure.h(7,11): warning C4570: AbstractFigure: не был объявлен явно как абстрактный, однако содержит абстрактные функции
+D:\COURSEWORK\GOSTDiagram\AbstractFigure.h(7,11): message : void AbstractFigure::drawFigure(System::Windows::Forms::PaintEventArgs ^,bool): абстрактный
+D:\COURSEWORK\GOSTDiagram\AbstractFigure.h(10): message : см. объявление "AbstractFigure::drawFigure"
+D:\COURSEWORK\GOSTDiagram\RectFunc.h(6,11): warning C4570: RectFunc: не был объявлен явно как абстрактный, однако содержит абстрактные функции
+D:\COURSEWORK\GOSTDiagram\RectFunc.h(6,11): message : void RectFunc::drawFigure(System::Windows::Forms::PaintEventArgs ^,bool): абстрактный
+D:\COURSEWORK\GOSTDiagram\RectFunc.h(15): message : см. объявление "RectFunc::drawFigure"
+D:\COURSEWORK\GOSTDiagram\LineFunc.cpp(19,19): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+  PictureView.cpp
+D:\COURSEWORK\GOSTDiagram\AbstractFigure.h(7,11): warning C4570: AbstractFigure: не был объявлен явно как абстрактный, однако содержит абстрактные функции
+D:\COURSEWORK\GOSTDiagram\AbstractFigure.h(7,11): message : void AbstractFigure::drawFigure(System::Windows::Forms::PaintEventArgs ^,bool): абстрактный
+D:\COURSEWORK\GOSTDiagram\AbstractFigure.h(10): message : см. объявление "AbstractFigure::drawFigure"
+D:\COURSEWORK\GOSTDiagram\RectFunc.h(6,11): warning C4570: RectFunc: не был объявлен явно как абстрактный, однако содержит абстрактные функции
+D:\COURSEWORK\GOSTDiagram\RectFunc.h(6,11): message : void RectFunc::drawFigure(System::Windows::Forms::PaintEventArgs ^,bool): абстрактный
+D:\COURSEWORK\GOSTDiagram\RectFunc.h(15): message : см. объявление "RectFunc::drawFigure"
+D:\COURSEWORK\GOSTDiagram\PictureView.cpp(89,89): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+D:\COURSEWORK\GOSTDiagram\PictureView.cpp(89,77): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+D:\COURSEWORK\GOSTDiagram\PictureView.cpp(90,93): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+D:\COURSEWORK\GOSTDiagram\PictureView.cpp(90,80): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+D:\COURSEWORK\GOSTDiagram\PictureView.cpp(141,22): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+D:\COURSEWORK\GOSTDiagram\PictureView.cpp(140,22): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+D:\COURSEWORK\GOSTDiagram\PictureView.cpp(139,18): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+D:\COURSEWORK\GOSTDiagram\PictureView.cpp(138,81): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+  RectFunctions.cpp
+D:\COURSEWORK\GOSTDiagram\AbstractFigure.h(7,11): warning C4570: AbstractFigure: не был объявлен явно как абстрактный, однако содержит абстрактные функции
+D:\COURSEWORK\GOSTDiagram\AbstractFigure.h(7,11): message : void AbstractFigure::drawFigure(System::Windows::Forms::PaintEventArgs ^,bool): абстрактный
+D:\COURSEWORK\GOSTDiagram\AbstractFigure.h(10): message : см. объявление "AbstractFigure::drawFigure"
+D:\COURSEWORK\GOSTDiagram\RectFunc.h(6,11): warning C4570: RectFunc: не был объявлен явно как абстрактный, однако содержит абстрактные функции
+D:\COURSEWORK\GOSTDiagram\RectFunc.h(6,11): message : void RectFunc::drawFigure(System::Windows::Forms::PaintEventArgs ^,bool): абстрактный
+D:\COURSEWORK\GOSTDiagram\RectFunc.h(15): message : см. объявление "RectFunc::drawFigure"
+D:\COURSEWORK\GOSTDiagram\RectFunctions.cpp(118,111): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+D:\COURSEWORK\GOSTDiagram\RectFunctions.cpp(123,47): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+D:\COURSEWORK\GOSTDiagram\RectFunctions.cpp(122,47): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
+  UndoStack.cpp
+D:\COURSEWORK\GOSTDiagram\AbstractFigure.h(7,11): warning C4570: AbstractFigure: не был объявлен явно как абстрактный, однако содержит абстрактные функции
+D:\COURSEWORK\GOSTDiagram\AbstractFigure.h(7,11): message : void AbstractFigure::drawFigure(System::Windows::Forms::PaintEventArgs ^,bool): абстрактный
+D:\COURSEWORK\GOSTDiagram\AbstractFigure.h(10): message : см. объявление "AbstractFigure::drawFigure"
+D:\COURSEWORK\GOSTDiagram\RectFunc.h(6,11): warning C4570: RectFunc: не был объявлен явно как абстрактный, однако содержит абстрактные функции
+D:\COURSEWORK\GOSTDiagram\RectFunc.h(6,11): message : void RectFunc::drawFigure(System::Windows::Forms::PaintEventArgs ^,bool): абстрактный
+D:\COURSEWORK\GOSTDiagram\RectFunc.h(15): message : см. объявление "RectFunc::drawFigure"
+  Создание кода...
   AbstractFigure.obj : обнаружен модуль MSIL; для MSIL последовательная компоновка отключена; выполняется полная компоновка
   GOSTDiagram.vcxproj -> D:\COURSEWORK\GOSTDiagram\Debug\GOSTDiagram.exe

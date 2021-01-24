@@ -1,12 +1,12 @@
 #pragma once
 
 
-enum WriteType {
+enum WriteType {  //типы для записи в фигуру 
 	WRITE,
 	NOT_WRITE
 };
 
-enum FunctionType{
+enum FunctionType{ //типы фигур 
 	POINTER,
 	LINE,
 	PROCESS,
@@ -17,7 +17,7 @@ enum FunctionType{
 	TEXT
 };
 
-enum TDrawMode
+enum TDrawMode   // типы режимов рисования 
 {
 	DRAW,
 	NOT_DRAW,
@@ -26,8 +26,8 @@ enum TDrawMode
 
 
 
-enum EditMode
-{
+enum EditMode   // типы режимов редактировния  
+{ 
 	NOT_EDIT, 
 	MOVE, 
 	LEFT, 
@@ -38,14 +38,13 @@ enum EditMode
 	RIGHT_TOP,
 	LEFT_BOTTOM,
 	RIGHT_BOTTOM,
-	RESIZE_LINE
 };
 
-struct  Rect
+struct  Rect // структура для прямоугольой области 
 {
 	int top,bottom,right,left;
 
 };
 
-System::String^ functionTypeToString(FunctionType v);
+System::String^ functionTypeToString(FunctionType v);  // перевод типа фигуры в строку 
 

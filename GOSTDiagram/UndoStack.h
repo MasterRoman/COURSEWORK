@@ -1,7 +1,7 @@
 #pragma once
 #include "FigureModel.h"
 
-enum UndoTypes
+enum UndoTypes  // типы действий ,которые можно отменить
 {
 	FUNC_MOVE_UNDO,
 	LINE_MOVE_UNDO,
@@ -11,7 +11,7 @@ enum UndoTypes
 
 };
 
-ref struct UndoStack
+ref struct UndoStack   // структура стека 
 {
 	List^ figure;
 	UndoTypes type;
@@ -19,7 +19,7 @@ ref struct UndoStack
 	UndoStack^ next;
 };
 
-
+// основные функции для работы со стеком 
 UndoStack^ stackInit(UndoStack^ head);
 bool stackIsEmpty(UndoStack^ head);
 void pushStack(UndoStack^ head, List^ figure, UndoTypes type, System::String^ str);

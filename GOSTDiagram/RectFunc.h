@@ -1,5 +1,8 @@
 #pragma once
 #include "AbstractFigure.h"
+
+// базовый класс для всех фигур
+
 ref class RectFunc : public AbstractFigure
 {
 public: 

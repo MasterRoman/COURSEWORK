@@ -2,6 +2,8 @@
 
 #include "DataTypes.h"
 
+// Абстрактный базовый класс 
+
 ref class AbstractFigure {
  
 public:
